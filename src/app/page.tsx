@@ -1,103 +1,250 @@
-import Image from "next/image";
+import Link from "next/link"
+import Image from "next/image"
+import { Calendar, Users, Palette } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function Home() {
+export default function HomePage() {
+  const featuredWorks = [
+    {
+      id: 1,
+      title: "デジタルアート展示",
+      creator: "アートサークル",
+      image: "/placeholder.svg?height=300&width=400",
+      category: "デジタルアート",
+      isCurrentlyDisplayed: true,
+    },
+    {
+      id: 2,
+      title: "陶芸作品集",
+      creator: "工芸ゼミ",
+      image: "/placeholder.svg?height=300&width=400",
+      category: "工芸",
+      isCurrentlyDisplayed: true,
+    },
+    {
+      id: 3,
+      title: "写真展「日常の美」",
+      creator: "写真部",
+      image: "/placeholder.svg?height=300&width=400",
+      category: "写真",
+      isCurrentlyDisplayed: false,
+    },
+  ]
+
+  const upcomingWorkshops = [
+    {
+      title: "陶芸体験ワークショップ",
+      time: "10:00-12:00",
+      date: "今日",
+    },
+    {
+      title: "デジタルアート講座",
+      time: "14:00-16:00",
+      date: "明日",
+    },
+  ]
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center space-x-2">
+              <Palette className="h-8 w-8 text-purple-600" />
+              <h1 className="text-2xl font-bold text-gray-900">藝苑祭</h1>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <Link href="/exhibitions" className="text-gray-700 hover:text-purple-600 font-medium">
+                展示
+              </Link>
+              <Link href="/creators" className="text-gray-700 hover:text-purple-600 font-medium">
+                創作者
+              </Link>
+              <Link href="/workshops" className="text-gray-700 hover:text-purple-600 font-medium">
+                ワークショップ
+              </Link>
+            </nav>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            創造の祭典
+            <span className="block text-purple-600">藝苑祭</span>
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            学生たちの創作活動を展示し、創作者と来場者をつなぐクリエイティブフェスティバル
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
+              <Link href="/exhibitions">展示を見る</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/workshops">ワークショップ</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">藝苑祭の特徴</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center">
+              <CardHeader>
+                <Palette className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <CardTitle>多様な創作展示</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>デジタルアート、工芸、写真など様々なジャンルの創作物を展示</CardDescription>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardHeader>
+                <Users className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <CardTitle>創作者とのつながり</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>創作者のプロフィールや活動詳細を通じて、来場者との交流を促進</CardDescription>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardHeader>
+                <Calendar className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <CardTitle>体験ワークショップ</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>創作体験ができるワークショップを開催し、創作の楽しさを共有</CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Works */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h3 className="text-3xl font-bold text-gray-900">注目の展示</h3>
+            <Button asChild variant="outline">
+              <Link href="/exhibitions">すべて見る</Link>
+            </Button>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {featuredWorks.map((work) => (
+              <Card key={work.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <Image
+                    src={work.image || "/placeholder.svg"}
+                    alt={work.title}
+                    width={400}
+                    height={300}
+                    className="w-full h-48 object-cover"
+                  />
+                  {work.isCurrentlyDisplayed && (
+                    <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                      展示中
+                    </div>
+                  )}
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg">{work.title}</CardTitle>
+                  <CardDescription>{work.creator}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-purple-600 font-medium">{work.category}</span>
+                    <Button asChild size="sm" variant="outline">
+                      <Link href={`/exhibitions/${work.id}`}>詳細</Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Workshops */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h3 className="text-3xl font-bold text-gray-900">今後のワークショップ</h3>
+            <Button asChild variant="outline">
+              <Link href="/workshops">カレンダーを見る</Link>
+            </Button>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {upcomingWorkshops.map((workshop, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-lg">{workshop.title}</CardTitle>
+                      <CardDescription>
+                        {workshop.date} {workshop.time}
+                      </CardDescription>
+                    </div>
+                    <Calendar className="h-6 w-6 text-purple-600" />
+                  </div>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <Palette className="h-6 w-6" />
+                <span className="text-xl font-bold">藝苑祭</span>
+              </div>
+              <p className="text-gray-400">学生たちの創作活動を支援し、創造性を育むクリエイティブフェスティバル</p>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">リンク</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/exhibitions" className="hover:text-white">
+                    展示
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/creators" className="hover:text-white">
+                    創作者
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/workshops" className="hover:text-white">
+                    ワークショップ
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">お問い合わせ</h4>
+              <p className="text-gray-400">
+                藝苑祭実行委員会
+                <br />
+                info@geien-festival.jp
+              </p>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 藝苑祭. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
