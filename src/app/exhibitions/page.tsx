@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Search, Palette, ArrowLeft } from "lucide-react"
+import { Search, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -101,7 +101,6 @@ export default function ExhibitionsPage() {
                 </Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <Palette className="h-8 w-8 text-purple-600" />
                 <h1 className="text-2xl font-bold text-gray-900">展示一覧</h1>
               </div>
             </div>
@@ -113,7 +112,7 @@ export default function ExhibitionsPage() {
         {/* Search and Filters */}
         <div className="mb-8 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-1">
+            <div className="relative flex-1 w-auto h-auto bg-white border-purple-700">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 placeholder="展示名や創作者で検索..."
@@ -123,7 +122,7 @@ export default function ExhibitionsPage() {
               />
             </div>
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-full md:w-48">
+              <SelectTrigger className="w-full md:w-48 bg-white">
                 <SelectValue placeholder="カテゴリー" />
               </SelectTrigger>
               <SelectContent>
@@ -136,7 +135,7 @@ export default function ExhibitionsPage() {
               </SelectContent>
             </Select>
             <Select value={displayFilter} onValueChange={setDisplayFilter}>
-              <SelectTrigger className="w-full md:w-48">
+              <SelectTrigger className="w-full md:w-48 bg-white">
                 <SelectValue placeholder="展示状況" />
               </SelectTrigger>
               <SelectContent>

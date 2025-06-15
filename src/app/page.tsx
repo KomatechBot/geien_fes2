@@ -51,19 +51,18 @@ export default function HomePage() {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-2">
-              <Palette className="h-8 w-8 text-purple-600" />
-              <h1 className="text-2xl font-bold text-gray-900">藝苑祭</h1>
+            <div className="flex items-center space-x-1">
+              <h1 className="text-3xl font-bold text-gray-900">藝苑祭</h1>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <Link href="/exhibitions" className="text-gray-700 hover:text-purple-600 font-medium">
-                展示
+              <Link href="/exhibitions" className="text-gray-700 hover:text-purple-600 font-bold">
+                展示品
               </Link>
-              <Link href="/creators" className="text-gray-700 hover:text-purple-600 font-medium">
-                創作者
+              <Link href="/creators" className="text-gray-700 hover:text-purple-600 font-bold">
+                制作者プロフィール
               </Link>
-              <Link href="/workshops" className="text-gray-700 hover:text-purple-600 font-medium">
-                ワークショップ
+              <Link href="/workshops" className="text-gray-700 hover:text-purple-600 font-bold">
+                イベントカレンダー
               </Link>
             </nav>
           </div>
@@ -71,21 +70,21 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="h-screen w-screen py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mt-45 items-center text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             創造の祭典
             <span className="block text-purple-600">藝苑祭</span>
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            学生たちの創作活動を展示し、創作者と来場者をつなぐクリエイティブフェスティバル
+            学生たちの創作活動を展示し、創作者と利用者を繋ぐクリエイティブフェスティバル
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
               <Link href="/exhibitions">展示を見る</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="/workshops">ワークショップ</Link>
+              <Link href="/workshops">イベントを見る</Link>
             </Button>
           </div>
         </div>
@@ -94,24 +93,24 @@ export default function HomePage() {
       {/* Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">藝苑祭の特徴</h3>
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">藝苑祭とは？</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center">
               <CardHeader>
                 <Palette className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-                <CardTitle>多様な創作展示</CardTitle>
+                <CardTitle>多くの制作展示</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>デジタルアート、工芸、写真など様々なジャンルの創作物を展示</CardDescription>
+                <CardDescription>デジタルアート、文学、デザートなど様々な制作物の展示や試食ができます！</CardDescription>
               </CardContent>
             </Card>
             <Card className="text-center">
               <CardHeader>
                 <Users className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-                <CardTitle>創作者とのつながり</CardTitle>
+                <CardTitle>制作者とのつながり</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>創作者のプロフィールや活動詳細を通じて、来場者との交流を促進</CardDescription>
+                <CardDescription>製作者の活動内容を通じて、制作者と利用者との交流ができます！</CardDescription>
               </CardContent>
             </Card>
             <Card className="text-center">
@@ -120,7 +119,7 @@ export default function HomePage() {
                 <CardTitle>体験ワークショップ</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>創作体験ができるワークショップを開催し、創作の楽しさを共有</CardDescription>
+                <CardDescription>制作体験ができるワークショップを開催し、制作の楽しさやを共有</CardDescription>
               </CardContent>
             </Card>
           </div>
@@ -175,7 +174,7 @@ export default function HomePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-3xl font-bold text-gray-900">今後のワークショップ</h3>
+            <h3 className="text-3xl font-bold text-gray-900">今後のイベント</h3>
             <Button asChild variant="outline">
               <Link href="/workshops">カレンダーを見る</Link>
             </Button>
@@ -206,27 +205,30 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Palette className="h-6 w-6" />
                 <span className="text-xl font-bold">藝苑祭</span>
               </div>
-              <p className="text-gray-400">学生たちの創作活動を支援し、創造性を育むクリエイティブフェスティバル</p>
+              <p className="text-gray-400">学生たちの創作活動を展示し、制作者と利用者を繋ぐクリエイティブフェスティバル</p>
+              <br />
+              <Link href="https://www.komazawa-u.ac.jp/" className="text-gray-400 hover:text-white">
+                駒澤大学について
+              </Link>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">リンク</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/exhibitions" className="hover:text-white">
-                    展示
+                    展示品
                   </Link>
                 </li>
                 <li>
                   <Link href="/creators" className="hover:text-white">
-                    創作者
+                    制作者プロフィール
                   </Link>
                 </li>
                 <li>
                   <Link href="/workshops" className="hover:text-white">
-                    ワークショップ
+                    イベントカレンダー
                   </Link>
                 </li>
               </ul>
@@ -235,13 +237,14 @@ export default function HomePage() {
               <h4 className="text-lg font-semibold mb-4">お問い合わせ</h4>
               <p className="text-gray-400">
                 藝苑祭実行委員会
-                <br />
-                info@geien-festival.jp
+              </p>
+              <p className="text-gray-400">
+                メールアドレスなど記入
               </p>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 藝苑祭. All rights reserved.</p>
+            <p>&copy; 2025 藝苑祭. All rights reserved.</p>
           </div>
         </div>
       </footer>

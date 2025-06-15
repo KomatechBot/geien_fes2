@@ -89,7 +89,7 @@ export default function CreatorsPage() {
               </Button>
               <div className="flex items-center space-x-2">
                 <Users className="h-8 w-8 text-purple-600" />
-                <h1 className="text-2xl font-bold text-gray-900">創作者一覧</h1>
+                <h1 className="text-2xl font-bold text-gray-900">制作者一覧</h1>
               </div>
             </div>
           </div>

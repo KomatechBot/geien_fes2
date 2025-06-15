@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, use } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, QrCode, Share2, Heart, MapPin, Clock, User } from "lucide-react"
+import { ArrowLeft, QrCode, Share2, MapPin, Clock, User, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -16,6 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+
 
 // QRコード生成用のコンポーネント（実際の実装ではqrcode.jsなどを使用）
 function QRCodeDisplay({ url }: { url: string }) {
@@ -34,12 +35,12 @@ function QRCodeDisplay({ url }: { url: string }) {
   )
 }
 
-export default function ExhibitionDetailPage({ params }: { params: { id: string } }) {
-  const [isLiked, setIsLiked] = useState(false)
+export default function ExhibitionDetailPage(props: {params: Promise<{ id: string}>}) {
+  const { id } = use(props.params)
 
   // 実際の実装ではmicroCMSからデータを取得
   const exhibition = {
-    id: Number.parseInt(params.id),
+    id: Number.parseInt(id),
     title: "デジタルアート展示",
     creator: "アートサークル",
     creatorId: "art-circle",
@@ -51,22 +52,22 @@ export default function ExhibitionDetailPage({ params }: { params: { id: string 
     ],
     category: "デジタルアート",
     isCurrentlyDisplayed: true,
-    description:
-      "最新のデジタル技術を使用した革新的なアート作品。AIと人間の創造性の融合を探求し、新しい表現の可能性を追求しています。",
+    description: "最新のデジタル技術を使用した革新的なアート作品。AIと人間の創造性の融合を探求し、新しい表現の可能性を追求しています。",
     longDescription: `この展示では、最新のデジタル技術を駆使して制作された革新的なアート作品を紹介します。
 
-人工知能と人間の創造性の融合をテーマに、従来のアートの概念を超えた新しい表現の可能性を探求しています。
+    人工知能と人間の創造性の融合をテーマに、従来のアートの概念を超えた新しい表現の可能性を探求しています。
 
-作品は全てインタラクティブな要素を含んでおり、来場者の動きや声に反応して変化します。デジタルとアナログ、テクノロジーと感情の境界線を曖昧にし、観る人それぞれに異なる体験を提供します。
+    作品は全てインタラクティブな要素を含んでおり、来場者の動きや声に反応して変化します。デジタルとアナログ、テクノロジーと感情の境界線を曖昧にし、観る人それぞれに異なる体験を提供します。
 
-制作には最新の機械学習技術、リアルタイム画像処理、音響解析などが使用されており、技術的な側面からも注目に値する作品群となっています。`,
+    制作には最新の機械学習技術、リアルタイム画像処理、音響解析などが使用されており、技術的な側面からも注目に値する作品群となっています。`,
     location: "第1展示室",
     displayPeriod: "2024年6月15日 - 6月30日",
     openingHours: "10:00 - 18:00",
     tags: ["デジタルアート", "AI", "インタラクティブ", "最新技術"],
-    likes: 42,
   }
 
+  
+  const [copied, setCopied] = useState(false)
   const currentUrl = typeof window !== "undefined" ? window.location.href : ""
 
   const handleShare = async () => {
@@ -77,15 +78,20 @@ export default function ExhibitionDetailPage({ params }: { params: { id: string 
           text: exhibition.description,
           url: currentUrl,
         })
-      } catch (err) {
-        console.log("Error sharing:", err)
+      } catch (_) {
+        
       }
     } else {
       // フォールバック: クリップボードにコピー
-      navigator.clipboard.writeText(currentUrl)
-      alert("URLをクリップボードにコピーしました")
+      try {
+        await navigator.clipboard.writeText(currentUrl)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (_) {
+
     }
   }
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
@@ -100,18 +106,9 @@ export default function ExhibitionDetailPage({ params }: { params: { id: string 
               </Link>
             </Button>
             <div className="flex items-center space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsLiked(!isLiked)}
-                className={isLiked ? "text-red-500 border-red-500" : ""}
-              >
-                <Heart className={`h-4 w-4 mr-1 ${isLiked ? "fill-current" : ""}`} />
-                {exhibition.likes + (isLiked ? 1 : 0)}
-              </Button>
-              <Button variant="outline" size="sm" onClick={handleShare}>
-                <Share2 className="h-4 w-4 mr-1" />
-                共有
+              <Button onClick={handleShare} variant="outline" className="flex gap-2 items-center">
+                {copied ? <Copy className="w-4 h-4 text-green-500" /> : <Share2 className="w-4 h-4" />}
+                {copied ? "コピー完了" : "共有"}
               </Button>
               <Dialog>
                 <DialogTrigger asChild>
