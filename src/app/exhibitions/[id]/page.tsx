@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, use } from "react"
+import { useState, useEffect, use } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, QrCode, Share2, MapPin, Clock, User, Copy } from "lucide-react"
+import { ArrowLeft, Share2, QrCode, MapPin, Clock, User, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -16,60 +16,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import QRCodeDisplay from "@/components/qrcodeDisplay"
+
+import type { Exhibition } from "@/types/exhibition"
 
 
-// QRコード生成用のコンポーネント（実際の実装ではqrcode.jsなどを使用）
-function QRCodeDisplay({ url }: { url: string }) {
-  return (
-    <div className="flex flex-col items-center space-y-4">
-      <div className="w-48 h-48 bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
-        <div className="text-center">
-          <QrCode className="h-12 w-12 mx-auto mb-2 text-gray-400" />
-          <p className="text-sm text-gray-500">QRコード</p>
-          <p className="text-xs text-gray-400 mt-1">実装時にqrcode.jsを使用</p>
-        </div>
-      </div>
-      <p className="text-sm text-gray-600 text-center max-w-xs">このQRコードをスキャンして展示ページにアクセス</p>
-      <p className="text-xs text-gray-400 break-all max-w-xs text-center">{url}</p>
-    </div>
-  )
-}
+
 
 export default function ExhibitionDetailPage(props: {params: Promise<{ id: string}>}) {
   const { id } = use(props.params)
+  const [exhibition, setExhibition] = useState<Exhibition | null>(null)
+  const [copied, setCopied] = useState(false)
 
-  // 実際の実装ではmicroCMSからデータを取得
-  const exhibition = {
-    id: Number.parseInt(id),
-    title: "デジタルアート展示",
-    creator: "アートサークル",
-    creatorId: "art-circle",
-    image: "/placeholder.svg?height=600&width=800",
-    images: [
-      "/placeholder.svg?height=400&width=600",
-      "/placeholder.svg?height=400&width=600",
-      "/placeholder.svg?height=400&width=600",
-    ],
-    category: "デジタルアート",
-    isCurrentlyDisplayed: true,
-    description: "最新のデジタル技術を使用した革新的なアート作品。AIと人間の創造性の融合を探求し、新しい表現の可能性を追求しています。",
-    longDescription: `この展示では、最新のデジタル技術を駆使して制作された革新的なアート作品を紹介します。
 
-    人工知能と人間の創造性の融合をテーマに、従来のアートの概念を超えた新しい表現の可能性を探求しています。
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/exhibitions/${id}`)
+        const data = await res.json()
+        setExhibition(data)
+      } catch (err) {
+        console.error("Failed to fetch exhibition:", err)
+      }
+    }
 
-    作品は全てインタラクティブな要素を含んでおり、来場者の動きや声に反応して変化します。デジタルとアナログ、テクノロジーと感情の境界線を曖昧にし、観る人それぞれに異なる体験を提供します。
+    fetchData()
+  }, [id])
 
-    制作には最新の機械学習技術、リアルタイム画像処理、音響解析などが使用されており、技術的な側面からも注目に値する作品群となっています。`,
-    location: "第1展示室",
-    displayPeriod: "2024年6月15日 - 6月30日",
-    openingHours: "10:00 - 18:00",
-    tags: ["デジタルアート", "AI", "インタラクティブ", "最新技術"],
+  if (!exhibition) {
+    return <div>読み込み中...</div>
   }
 
-  
-  const [copied, setCopied] = useState(false)
-  const currentUrl = typeof window !== "undefined" ? window.location.href : ""
 
+  
+  
+  const currentUrl = typeof window !== "undefined" ? window.location.href : ""
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -139,7 +120,7 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
             {/* Main Image */}
             <div className="relative">
               <Image
-                src={exhibition.image || "/placeholder.svg"}
+                src={exhibition.image?.url ?? "/placeholder.svg"}
                 alt={exhibition.title}
                 width={800}
                 height={600}
@@ -169,7 +150,7 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
-              {exhibition.tags.map((tag) => (
+              {exhibition?.tags?.map((tag) => (
                 <Badge key={tag} variant="secondary">
                   #{tag}
                 </Badge>
@@ -199,16 +180,26 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-3 gap-4">
-                  {exhibition.images.map((image, index) => (
+                  {exhibition.images && exhibition.images.length > 0 ? (
+                    exhibition.images.map((image, index) => (
+                      <Image
+                        key={index}
+                        src={image.url}
+                        alt={`${exhibition.title} - 画像 ${index + 1}`}
+                        width={image.width}
+                        height={image.height}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                    ))
+                  ) : (
                     <Image
-                      key={index}
-                      src={image || "/placeholder.svg"}
-                      alt={`${exhibition.title} - 画像 ${index + 1}`}
+                      src="/placeholder.svg"
+                      alt="No image"
                       width={300}
                       height={200}
                       className="w-full h-32 object-cover rounded-lg"
                     />
-                  ))}
+                  )}
                 </div>
               </CardContent>
             </Card>

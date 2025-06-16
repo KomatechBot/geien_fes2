@@ -19,9 +19,9 @@ export default function CreatorsPage() {
     },
     {
       id: "craft-seminar",
-      name: "工芸ゼミ",
-      type: "ゼミ",
-      description: "伝統工芸と現代技術の融合を研究するゼミナール",
+      name: "工芸サークル",
+      type: "サークル",
+      description: "伝統工芸と現代技術の融合を研究するサークル",
       specialties: ["陶芸", "木工", "金属工芸"],
       memberCount: 8,
       contact: "craft-seminar@university.ac.jp",
@@ -105,7 +105,7 @@ export default function CreatorsPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {creators.map((creator) => (
-            <Card key={creator.id} className="hover:shadow-lg transition-shadow">
+            <Card key={creator.id} className="flex flex-col justify-between h-full hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
@@ -122,7 +122,7 @@ export default function CreatorsPage() {
                   </Badge>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="flex flex-col flex-grow space-y-4">
                 <p className="text-sm text-gray-600">{creator.description}</p>
 
                 <div>
@@ -157,10 +157,11 @@ export default function CreatorsPage() {
                     </div>
                   )}
                 </div>
-
-                <Button asChild className="w-full" size="sm">
-                  <Link href={`/creators/${creator.id}`}>詳細を見る</Link>
-                </Button>
+                <div className="mt-auto px-6 pb-5 pt-2">
+                  <Button asChild className="flex w-full" size="sm">
+                    <Link href={`/creators/${creator.id}`}>詳細を見る</Link>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}

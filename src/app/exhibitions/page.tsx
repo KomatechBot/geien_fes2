@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Search, ArrowLeft } from "lucide-react"
@@ -10,67 +10,30 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 
+
+//Exhibitionsの型定義
+import type { Exhibition } from "@/types/exhibition"
+
+
+
 export default function ExhibitionsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("all")
   const [displayFilter, setDisplayFilter] = useState("all")
+  const [exhibitions, setExhibitions] = useState<Exhibition[]>([])
 
-  const exhibitions = [
-    {
-      id: 1,
-      title: "デジタルアート展示",
-      creator: "アートサークル",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "デジタルアート",
-      isCurrentlyDisplayed: true,
-      description: "最新のデジタル技術を使用した革新的なアート作品",
-    },
-    {
-      id: 2,
-      title: "陶芸作品集",
-      creator: "工芸ゼミ",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "工芸",
-      isCurrentlyDisplayed: true,
-      description: "伝統的な技法と現代的なデザインが融合した陶芸作品",
-    },
-    {
-      id: 3,
-      title: "写真展「日常の美」",
-      creator: "写真部",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "写真",
-      isCurrentlyDisplayed: false,
-      description: "日常に隠れた美しい瞬間を切り取った写真作品",
-    },
-    {
-      id: 4,
-      title: "抽象絵画シリーズ",
-      creator: "美術部",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "絵画",
-      isCurrentlyDisplayed: true,
-      description: "色彩と形の調和を追求した抽象絵画作品",
-    },
-    {
-      id: 5,
-      title: "木工クラフト展",
-      creator: "木工サークル",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "工芸",
-      isCurrentlyDisplayed: false,
-      description: "自然素材を活かした実用的で美しい木工作品",
-    },
-    {
-      id: 6,
-      title: "イラストレーション展",
-      creator: "イラスト研究会",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "イラスト",
-      isCurrentlyDisplayed: true,
-      description: "多様なスタイルのイラストレーション作品",
-    },
-  ]
+
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const res = await fetch('/api/exhibitions')
+      const data = await res.json()
+      setExhibitions(data)
+    }
+    fetchData()
+  }, [])
+
+
 
   const filteredExhibitions = exhibitions.filter((exhibition) => {
     const matchesSearch =
@@ -158,7 +121,7 @@ export default function ExhibitionsPage() {
             <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="relative">
                 <Image
-                  src={exhibition.image || "/placeholder.svg"}
+                  src={exhibition.image?.url ?? "/placeholder.svg"}
                   alt={exhibition.title}
                   width={400}
                   height={300}
@@ -201,7 +164,7 @@ export default function ExhibitionsPage() {
               variant="outline"
               className="mt-4"
             >
-              フィルターをリセット
+              検索条件をリセット
             </Button>
           </div>
         )}

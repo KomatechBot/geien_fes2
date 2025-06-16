@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Calendar, Clock, Users, MapPin, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowLeft, Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -20,8 +20,6 @@ export default function WorkshopsPage() {
       time: "10:00-12:00",
       duration: 120,
       location: "工芸室A",
-      capacity: 12,
-      registered: 8,
       difficulty: "初心者向け",
       description: "粘土を使って基本的な陶芸技法を学び、オリジナルの器を制作します。",
       materials: "粘土、釉薬、道具一式（すべて提供）",
@@ -35,8 +33,6 @@ export default function WorkshopsPage() {
       time: "14:00-17:00",
       duration: 180,
       location: "PC室B",
-      capacity: 15,
-      registered: 12,
       difficulty: "中級者向け",
       description: "Photoshopを使用したデジタルアート制作の基本から応用まで学びます。",
       materials: "PC、ソフトウェア（提供）",
@@ -50,8 +46,6 @@ export default function WorkshopsPage() {
       time: "09:00-12:00",
       duration: 180,
       location: "屋外（集合：正門）",
-      capacity: 10,
-      registered: 7,
       difficulty: "初心者向け",
       description: "カメラの基本操作から構図の取り方まで、実践的な撮影技術を学びます。",
       materials: "カメラ（デジタル一眼推奨、貸出可）",
@@ -65,8 +59,6 @@ export default function WorkshopsPage() {
       time: "13:00-16:00",
       duration: 180,
       location: "工作室",
-      capacity: 8,
-      registered: 6,
       difficulty: "初心者向け",
       description: "木材を使って小物入れやコースターなどの実用的な作品を制作します。",
       materials: "木材、工具一式（すべて提供）",
@@ -80,8 +72,6 @@ export default function WorkshopsPage() {
       time: "15:00-18:00",
       duration: 180,
       location: "美術室C",
-      capacity: 20,
-      registered: 15,
       difficulty: "初心者向け",
       description: "キャラクターデザインの基本から色彩理論まで、イラスト制作の基礎を学びます。",
       materials: "画材一式（提供）、タブレット（貸出可）",
@@ -95,8 +85,6 @@ export default function WorkshopsPage() {
       time: "10:00-13:00",
       duration: 180,
       location: "PC室A",
-      capacity: 12,
-      registered: 9,
       difficulty: "中級者向け",
       description: "Blenderを使用した3DCG制作の基本操作から簡単なモデリングまで学習します。",
       materials: "PC、ソフトウェア（提供）",
@@ -272,23 +260,6 @@ export default function WorkshopsPage() {
                           <span>{workshop.location}</span>
                         </div>
                       </div>
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <Users className="h-4 w-4 text-gray-400" />
-                          <span>
-                            {workshop.registered}/{workshop.capacity}名
-                            {workshop.registered >= workshop.capacity ? (
-                              <Badge variant="destructive" className="ml-2 text-xs">
-                                満席
-                              </Badge>
-                            ) : (
-                              <Badge variant="outline" className="ml-2 text-xs">
-                                残り{workshop.capacity - workshop.registered}席
-                              </Badge>
-                            )}
-                          </span>
-                        </div>
-                      </div>
                     </div>
 
                     <div className="space-y-2 text-sm">
@@ -302,15 +273,10 @@ export default function WorkshopsPage() {
 
                     <div className="flex justify-between items-center pt-4">
                       <div className="text-sm text-gray-600">
-                        申込締切:{" "}
+                        期間:{" "}
                         {new Date(new Date(workshop.date).getTime() - 24 * 60 * 60 * 1000).toLocaleDateString("ja-JP")}
+                        まで
                       </div>
-                      <Button
-                        disabled={workshop.registered >= workshop.capacity}
-                        className={workshop.registered >= workshop.capacity ? "opacity-50" : ""}
-                      >
-                        {workshop.registered >= workshop.capacity ? "満席" : "申し込む"}
-                      </Button>
                     </div>
                   </CardContent>
                 </Card>

@@ -15,16 +15,16 @@ export default function CreatorDetailPage({ params }: { params: { id: string } }
       "デジタルアートを中心とした創作活動を行う学生サークル。最新の技術を取り入れながら、伝統的なアートの概念を現代に再解釈する作品制作を行っています。",
     longDescription: `アートサークルは2018年に設立された学生主体の創作団体です。
 
-デジタルアートを中心としながらも、従来のアナログ手法との融合を重視し、新しい表現の可能性を追求しています。メンバーは美術学部だけでなく、工学部、文学部など多様な学部から参加しており、異なる専門性を活かした学際的な作品制作を行っています。
+    デジタルアートを中心としながらも、従来のアナログ手法との融合を重視し、新しい表現の可能性を追求しています。メンバーは美術学部だけでなく、工学部、文学部など多様な学部から参加しており、異なる専門性を活かした学際的な作品制作を行っています。
 
-主な活動内容：
-• 月2回の定期制作会
-• 年4回の作品発表会
-• 外部アーティストを招いたワークショップ
-• 地域のアートイベントへの参加
-• 他大学との合同展示会
+    主な活動内容：
+    • 月2回の定期制作会
+    • 年4回の作品発表会
+    • 外部アーティストを招いたワークショップ
+    • 地域のアートイベントへの参加
+    • 他大学との合同展示会
 
-私たちは「技術と感性の調和」をテーマに、デジタル技術を単なる道具として使うのではなく、新しい芸術表現の可能性を探求するパートナーとして捉えています。`,
+    私たちは「技術と感性の調和」をテーマに、デジタル技術を単なる道具として使うのではなく、新しい芸術表現の可能性を探求するパートナーとして捉えています。`,
     specialties: ["デジタルアート", "3DCG", "映像制作", "インタラクティブアート"],
     memberCount: 15,
     establishedYear: 2018,
@@ -37,17 +37,14 @@ export default function CreatorDetailPage({ params }: { params: { id: string } }
     exhibitions: [
       {
         title: "デジタルアート展示",
-        year: 2024,
         description: "最新のAI技術を活用したインタラクティブアート作品",
       },
       {
         title: "3D映像作品展",
-        year: 2023,
         description: "立体映像技術を使った没入型アート体験",
       },
       {
         title: "学際アート展",
-        year: 2023,
         description: "他学部との協働による実験的作品群",
       },
     ],
@@ -180,7 +177,6 @@ export default function CreatorDetailPage({ params }: { params: { id: string } }
                     <div key={index}>
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="font-medium text-lg">{exhibition.title}</h4>
-                        <Badge variant="outline">{exhibition.year}年</Badge>
                       </div>
                       <p className="text-gray-600 text-sm">{exhibition.description}</p>
                       {index < creator.exhibitions.length - 1 && <Separator className="mt-4" />}
