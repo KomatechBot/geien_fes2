@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect, use } from "react"
 import Link from "next/link"
 import { ArrowLeft, User, Mail, ExternalLink, Users, Calendar, Palette } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -5,69 +8,34 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
-export default function CreatorDetailPage({ params }: { params: { id: string } }) {
-  // 実際の実装ではmicroCMSからデータを取得
-  const creator = {
-    id: params.id,
-    name: "アートサークル",
-    type: "サークル",
-    description:
-      "デジタルアートを中心とした創作活動を行う学生サークル。最新の技術を取り入れながら、伝統的なアートの概念を現代に再解釈する作品制作を行っています。",
-    longDescription: `アートサークルは2018年に設立された学生主体の創作団体です。
+import type { Creator } from "@/types/creators"
 
-    デジタルアートを中心としながらも、従来のアナログ手法との融合を重視し、新しい表現の可能性を追求しています。メンバーは美術学部だけでなく、工学部、文学部など多様な学部から参加しており、異なる専門性を活かした学際的な作品制作を行っています。
 
-    主な活動内容：
-    • 月2回の定期制作会
-    • 年4回の作品発表会
-    • 外部アーティストを招いたワークショップ
-    • 地域のアートイベントへの参加
-    • 他大学との合同展示会
 
-    私たちは「技術と感性の調和」をテーマに、デジタル技術を単なる道具として使うのではなく、新しい芸術表現の可能性を探求するパートナーとして捉えています。`,
-    specialties: ["デジタルアート", "3DCG", "映像制作", "インタラクティブアート"],
-    memberCount: 15,
-    establishedYear: 2018,
-    contact: "art-circle@university.ac.jp",
-    website: "https://art-circle.example.com",
-    socialMedia: {
-      twitter: "@art_circle_uni",
-      instagram: "@artcircle_university",
-    },
-    exhibitions: [
-      {
-        title: "デジタルアート展示",
-        description: "最新のAI技術を活用したインタラクティブアート作品",
-      },
-      {
-        title: "3D映像作品展",
-        description: "立体映像技術を使った没入型アート体験",
-      },
-      {
-        title: "学際アート展",
-        description: "他学部との協働による実験的作品群",
-      },
-    ],
-    upcomingEvents: [
-      {
-        title: "デジタルアート制作ワークショップ",
-        date: "2024年6月20日",
-        time: "14:00-17:00",
-        description: "初心者向けのデジタルアート制作体験",
-      },
-      {
-        title: "作品講評会",
-        date: "2024年6月25日",
-        time: "18:00-20:00",
-        description: "メンバーの最新作品を発表・討論",
-      },
-    ],
-    achievements: [
-      "2023年度 学生アート大賞 優秀賞受賞",
-      "地域アートフェスティバル 特別賞受賞",
-      "他大学との合同展示会 主催",
-    ],
+export default function CreatorDetailPage(props: {params: Promise<{ id: string}>}) {
+  const { id } = use(props.params)
+  const [creator, setCreator] = useState<Creator | null>(null)
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/exhibitions/${id}`)
+        const data = await res.json()
+        setCreator(data)
+      } catch (_) {
+        
+      }
+    }
+
+    fetchData()
+  }, [id])
+
+  if (!creator) {
+    return <div>読み込み中...</div>
   }
+  
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">

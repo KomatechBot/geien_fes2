@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowLeft, Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -8,90 +8,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
+import type { Workshop } from "../../types/workshop"
+
 export default function WorkshopsPage() {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 5, 15)) // 2024年6月15日
+  const [workshops, setWorkshops] = useState<Workshop[]>([])
 
-  const workshops = [
-    {
-      id: 1,
-      title: "陶芸体験ワークショップ",
-      instructor: "工芸ゼミ",
-      date: "2024-06-15",
-      time: "10:00-12:00",
-      duration: 120,
-      location: "工芸室A",
-      difficulty: "初心者向け",
-      description: "粘土を使って基本的な陶芸技法を学び、オリジナルの器を制作します。",
-      materials: "粘土、釉薬、道具一式（すべて提供）",
-      requirements: "汚れても良い服装でお越しください",
-    },
-    {
-      id: 2,
-      title: "デジタルアート制作講座",
-      instructor: "アートサークル",
-      date: "2024-06-16",
-      time: "14:00-17:00",
-      duration: 180,
-      location: "PC室B",
-      difficulty: "中級者向け",
-      description: "Photoshopを使用したデジタルアート制作の基本から応用まで学びます。",
-      materials: "PC、ソフトウェア（提供）",
-      requirements: "基本的なPC操作ができる方",
-    },
-    {
-      id: 3,
-      title: "写真撮影テクニック講座",
-      instructor: "写真部",
-      date: "2024-06-17",
-      time: "09:00-12:00",
-      duration: 180,
-      location: "屋外（集合：正門）",
-      difficulty: "初心者向け",
-      description: "カメラの基本操作から構図の取り方まで、実践的な撮影技術を学びます。",
-      materials: "カメラ（デジタル一眼推奨、貸出可）",
-      requirements: "歩きやすい服装と靴",
-    },
-    {
-      id: 4,
-      title: "木工クラフト体験",
-      instructor: "木工サークル",
-      date: "2024-06-18",
-      time: "13:00-16:00",
-      duration: 180,
-      location: "工作室",
-      difficulty: "初心者向け",
-      description: "木材を使って小物入れやコースターなどの実用的な作品を制作します。",
-      materials: "木材、工具一式（すべて提供）",
-      requirements: "安全のため長袖着用推奨",
-    },
-    {
-      id: 5,
-      title: "イラスト描画ワークショップ",
-      instructor: "イラスト研究会",
-      date: "2024-06-19",
-      time: "15:00-18:00",
-      duration: 180,
-      location: "美術室C",
-      difficulty: "初心者向け",
-      description: "キャラクターデザインの基本から色彩理論まで、イラスト制作の基礎を学びます。",
-      materials: "画材一式（提供）、タブレット（貸出可）",
-      requirements: "特になし",
-    },
-    {
-      id: 6,
-      title: "3DCG制作入門",
-      instructor: "アートサークル",
-      date: "2024-06-20",
-      time: "10:00-13:00",
-      duration: 180,
-      location: "PC室A",
-      difficulty: "中級者向け",
-      description: "Blenderを使用した3DCG制作の基本操作から簡単なモデリングまで学習します。",
-      materials: "PC、ソフトウェア（提供）",
-      requirements: "基本的なPC操作ができる方",
-    },
-  ]
+  useEffect(() => {
+      const fetchData = async() => {
+        const res = await fetch('/api/workshops')
+        const data = await res.json()
+        setWorkshops(data)
+      }
+      fetchData()
+    }, [])
 
+  
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
   }

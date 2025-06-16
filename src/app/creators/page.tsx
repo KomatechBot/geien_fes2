@@ -1,78 +1,28 @@
+"use client"
+
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, Users, User, Mail, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
+import type { Creator } from "@/types/creators"
+
 export default function CreatorsPage() {
-  const creators = [
-    {
-      id: "art-circle",
-      name: "アートサークル",
-      type: "サークル",
-      description: "デジタルアートを中心とした創作活動を行う学生サークル",
-      specialties: ["デジタルアート", "3DCG", "映像制作"],
-      memberCount: 15,
-      contact: "art-circle@university.ac.jp",
-      website: "https://art-circle.example.com",
-      exhibitions: ["デジタルアート展示", "3D映像作品展"],
-    },
-    {
-      id: "craft-seminar",
-      name: "工芸サークル",
-      type: "サークル",
-      description: "伝統工芸と現代技術の融合を研究するサークル",
-      specialties: ["陶芸", "木工", "金属工芸"],
-      memberCount: 8,
-      contact: "craft-seminar@university.ac.jp",
-      website: null,
-      exhibitions: ["陶芸作品集", "現代工芸展"],
-    },
-    {
-      id: "photo-club",
-      name: "写真部",
-      type: "部活",
-      description: "写真撮影技術の向上と作品制作を目的とした部活動",
-      specialties: ["風景写真", "ポートレート", "ストリートフォト"],
-      memberCount: 22,
-      contact: "photo-club@university.ac.jp",
-      website: "https://photo-club.example.com",
-      exhibitions: ["写真展「日常の美」", "四季の風景写真展"],
-    },
-    {
-      id: "art-department",
-      name: "美術部",
-      type: "部活",
-      description: "絵画を中心とした美術作品の制作と展示を行う部活動",
-      specialties: ["油絵", "水彩画", "抽象画"],
-      memberCount: 18,
-      contact: "art-dept@university.ac.jp",
-      website: null,
-      exhibitions: ["抽象絵画シリーズ", "学生美術展"],
-    },
-    {
-      id: "woodwork-circle",
-      name: "木工サークル",
-      type: "サークル",
-      description: "木材を使った実用的で美しい作品制作を行うサークル",
-      specialties: ["家具制作", "木彫", "建築模型"],
-      memberCount: 12,
-      contact: "woodwork@university.ac.jp",
-      website: "https://woodwork.example.com",
-      exhibitions: ["木工クラフト展", "手作り家具展示"],
-    },
-    {
-      id: "illustration-lab",
-      name: "イラスト研究会",
-      type: "研究会",
-      description: "多様なスタイルのイラストレーション制作と研究を行う団体",
-      specialties: ["キャラクターデザイン", "コンセプトアート", "絵本制作"],
-      memberCount: 25,
-      contact: "illust-lab@university.ac.jp",
-      website: "https://illust-lab.example.com",
-      exhibitions: ["イラストレーション展", "キャラクターアート展"],
-    },
-  ]
+  const [creators, setCreators] = useState<Creator[]>([])
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const res = await fetch('/api/creators')
+      const data = await res.json()
+      setCreators(data)
+    }
+    fetchData()
+  }, [])
+  
+  
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
@@ -139,8 +89,11 @@ export default function CreatorsPage() {
                 <div>
                   <h4 className="font-medium text-sm mb-2">主な展示</h4>
                   <ul className="text-xs text-gray-600 space-y-1">
-                    {creator.exhibitions.map((exhibition) => (
-                      <li key={exhibition}>• {exhibition}</li>
+                    {creator.exhibitions.map((exhibition, index) => (
+                      <React.Fragment key={index}>
+                        <li>• {exhibition.title}</li>
+                        <li>• {exhibition.description}</li>
+                      </React.Fragment>
                     ))}
                   </ul>
                 </div>
