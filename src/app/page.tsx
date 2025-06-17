@@ -1,49 +1,41 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar, Users, Palette } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function HomePage() {
-  const featuredWorks = [
-    {
-      id: 1,
-      title: "デジタルアート展示",
-      creator: "アートサークル",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "デジタルアート",
-      isCurrentlyDisplayed: true,
-    },
-    {
-      id: 2,
-      title: "陶芸作品集",
-      creator: "工芸ゼミ",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "工芸",
-      isCurrentlyDisplayed: true,
-    },
-    {
-      id: 3,
-      title: "写真展「日常の美」",
-      creator: "写真部",
-      image: "/placeholder.svg?height=300&width=400",
-      category: "写真",
-      isCurrentlyDisplayed: false,
-    },
-  ]
+import type { Exhibition } from "@/types/exhibition"
+import type { Workshop } from "@/types/workshop"
 
-  const upcomingWorkshops = [
-    {
-      title: "陶芸体験ワークショップ",
-      time: "10:00-12:00",
-      date: "今日",
-    },
-    {
-      title: "デジタルアート講座",
-      time: "14:00-16:00",
-      date: "明日",
-    },
-  ]
+export default function HomePage() {
+  const [featuredExhibitions, setFeaturedExhibitions] = useState<Exhibition[]>([])
+  const [upcomingWorkshops, setUpcomingWorkshops] = useState<Workshop[]>([])
+
+
+  useEffect(() => {
+      const fetchData = async() => {
+       try {
+        const [exhibitionsRes, workshopsRes] = await Promise.all([
+          fetch('/api/exhibitions'),
+          fetch('/api/workshops')
+        ])
+
+        const exhibitionsData = await exhibitionsRes.json()
+        const workshopsData = await workshopsRes.json()
+
+        setFeaturedExhibitions(exhibitionsData)
+        setUpcomingWorkshops(workshopsData)
+       } catch (_) {
+
+       }
+      }
+      fetchData()
+    }, [])
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
@@ -136,31 +128,31 @@ export default function HomePage() {
             </Button>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {featuredWorks.map((work) => (
-              <Card key={work.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+            {featuredExhibitions.map((exhibition) => (
+              <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative">
                   <Image
-                    src={work.image || "/placeholder.svg"}
-                    alt={work.title}
+                    src={exhibition.image?.url ?? "/placeholder.svg"}
+                    alt={exhibition.title}
                     width={400}
                     height={300}
                     className="w-full h-48 object-cover"
                   />
-                  {work.isCurrentlyDisplayed && (
+                  {exhibition.isCurrentlyDisplayed && (
                     <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                       展示中
                     </div>
                   )}
                 </div>
                 <CardHeader>
-                  <CardTitle className="text-lg">{work.title}</CardTitle>
-                  <CardDescription>{work.creator}</CardDescription>
+                  <CardTitle className="text-lg">{exhibition.title}</CardTitle>
+                  <CardDescription>{exhibition.creator}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-purple-600 font-medium">{work.category}</span>
+                    <span className="text-sm text-purple-600 font-medium">{exhibition.category}</span>
                     <Button asChild size="sm" variant="outline">
-                      <Link href={`/exhibitions/${work.id}`}>詳細</Link>
+                      <Link href={`/exhibitions/${exhibition.id}`}>詳細</Link>
                     </Button>
                   </div>
                 </CardContent>
