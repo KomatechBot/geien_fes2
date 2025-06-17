@@ -34,11 +34,10 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
     const fetchData = async () => {
       try {
         const res = await fetch(`/api/exhibitions/${id}`)
-        if (!res.ok) throw new Error("Failed to fetch exhibition");
         const data = await res.json()
         setExhibition(data || null)
-      } catch (err) {
-        console.error("Failed to fetch exhibition:", err)
+      } catch (_) {
+   
       }
     }
 

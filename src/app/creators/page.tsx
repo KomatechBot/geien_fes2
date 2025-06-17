@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Users, User, Mail, ExternalLink } from "lucide-react"
+import { ArrowLeft, Users, User,  ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -39,7 +39,7 @@ export default function CreatorsPage() {
               </Button>
               <div className="flex items-center space-x-2">
                 <Users className="h-8 w-8 text-purple-600" />
-                <h1 className="text-2xl font-bold text-gray-900">制作者一覧</h1>
+                  <h1 className="text-2xl font-bold text-gray-900">制作者一覧</h1>
               </div>
             </div>
           </div>
@@ -90,7 +90,8 @@ export default function CreatorsPage() {
                 <div>
                   <h4 className="font-medium text-sm mb-2">主な展示</h4>
                   <ul className="text-xs text-gray-600 space-y-1">
-                    {creator.exhibitions.map((exhibition, index) => (
+                    {  Array.isArray(creator.exhibitions) && 
+                    creator.exhibitions.map((exhibition, index) => (
                       <React.Fragment key={index}>
                         <li>• {exhibition.title}</li>
                         <li>• {exhibition.description}</li>
@@ -100,10 +101,6 @@ export default function CreatorsPage() {
                 </div>
 
                 <div className="flex items-center justify-between pt-2">
-                  <div className="flex items-center space-x-2">
-                    <Mail className="h-4 w-4 text-gray-400" />
-                    <span className="text-xs text-gray-500">連絡可能</span>
-                  </div>
                   {creator.website && (
                     <div className="flex items-center space-x-1">
                       <ExternalLink className="h-3 w-3 text-gray-400" />

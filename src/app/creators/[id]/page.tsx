@@ -13,14 +13,14 @@ import type { Creator } from "@/types/creators"
 
 
 export default function CreatorDetailPage(props: {params: Promise<{ id: string}>}) {
-  const  id  = props.params
+  const { id } = use(props.params)
   const [creator, setCreator] = useState<Creator | null>(null)
   
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`/api/exhibitions/${id}`)
+        const res = await fetch(`/api/creators/${id}`)
         const data = await res.json()
         setCreator(data || null)
       } catch (_) {
@@ -30,6 +30,8 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
 
     fetchData()
   }, [id])
+
+  
 
   if (!creator) {return <div>読み込み中...</div>}
   
@@ -93,11 +95,11 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {creator.specialties?.map((specialty, index) => (
-                    <Badge key={index} variant="secondary" className="text-sm">
-                      {specialty}
+                  { creator.specialties && (
+                    <Badge variant="secondary" className="text-sm">
+                      {creator.specialties}
                     </Badge>
-                  ))}
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -109,25 +111,9 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="prose max-w-none">
-                  {creator.longDescription.split("\n\n").map((paragraph, index) => (
-                    <div key={index}>
-                      {paragraph.includes("•") ? (
-                        <div className="mb-4">
-                          {paragraph.split("\n").map((line, lineIndex) => (
-                            <div key={lineIndex} className="mb-1">
-                              {line.startsWith("•") ? (
-                                <div className="ml-4 text-gray-700">{line}</div>
-                              ) : (
-                                <div className="font-medium text-gray-900 mb-2">{line}</div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="mb-4 text-gray-700 leading-relaxed">{paragraph}</p>
-                      )}
-                    </div>
-                  ))}
+                  {creator.longDescription && (
+                    <p className="text-gray-700 leading-relaxed">{creator.longDescription}</p>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -139,15 +125,19 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {creator.exhibitions.map((exhibition, index) => (
-                    <div key={index}>
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-medium text-lg">{exhibition.title}</h4>
+                  { creator.exhibitions && creator.exhibitions.length > 0 && (
+                    <>
+                      <Separator />
+                      <div>
+                        <p className="font-medium mb-2">過去の展示</p>
+                        <ul className="text-sm text-gray-600 list-disc pl-5">
+                          {creator.exhibitions.map((exhibition) => (
+                            <li key={exhibition.id}>{exhibition.title}</li>
+                          ))}
+                        </ul>
                       </div>
-                      <p className="text-gray-600 text-sm">{exhibition.description}</p>
-                      {index < creator.exhibitions.length - 1 && <Separator className="mt-4" />}
-                    </div>
-                  ))}
+                    </>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -159,12 +149,12 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {creator.achievements.map((achievement, index) => (
-                    <li key={index} className="flex items-start space-x-2">
+                  { creator.achievements &&  (
+                    <li className="flex items-start space-x-2">
                       <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-gray-700">{achievement}</span>
+                      <span className="text-gray-700">{creator.achievements}</span>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </CardContent>
             </Card>
@@ -213,7 +203,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
                       <p className="font-medium mb-2">SNS</p>
                       <div className="space-y-1">
                         {creator.socialMedia && (
-                          <p className="text-sm text-gray-600">Twitter: {creator.socialMedia}</p>
+                          <p className="text-sm text-gray-600">{creator.socialMedia}</p>
                         )}
                       </div>
                     </div>
@@ -229,7 +219,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {creator.upcomingEvents.map((event, index) => (
+                  { Array.isArray(creator.upcomingEvents) && creator.upcomingEvents.map((event, index) => (
                     <div key={index}>
                       <h4 className="font-medium text-sm">{event.title}</h4>
                       <p className="text-xs text-gray-600 mb-1">

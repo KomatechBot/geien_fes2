@@ -1,10 +1,20 @@
-import { NextResponse } from "next/server";
-import { client } from "@/lib/microcms";
+import { NextRequest, NextResponse } from 'next/server'
+import { client } from '@/lib/microcms' // microCMSクライアントを定義した場所
 
-export async function GET() {
-    const data = await client.get({ endpoint: "creators"})
+type Params = {
+  params: {
+    id: string
+  }
+}
 
-    console.log("[API] creators data:", data.contents)
+export async function GET(req: NextRequest, { params }: Params) {
+   const { id } = await params
 
-    return NextResponse.json(data.contents)
+    const data = await client.get({
+      endpoint: 'creators',
+      contentId: id,
+      queries: { depth: 2 },
+    })
+
+    return NextResponse.json(data)
 }
