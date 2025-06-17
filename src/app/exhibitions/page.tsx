@@ -33,7 +33,7 @@ export default function ExhibitionsPage() {
     fetchData()
   }, [])
 
-
+  
 
   const filteredExhibitions = exhibitions.filter((exhibition) => {
     const matchesSearch =

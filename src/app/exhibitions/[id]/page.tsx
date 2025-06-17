@@ -30,11 +30,13 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 
 
   useEffect(() => {
+    if (!id) return;
     const fetchData = async () => {
       try {
         const res = await fetch(`/api/exhibitions/${id}`)
+        if (!res.ok) throw new Error("Failed to fetch exhibition");
         const data = await res.json()
-        setExhibition(data)
+        setExhibition(data || null)
       } catch (err) {
         console.error("Failed to fetch exhibition:", err)
       }
@@ -43,11 +45,8 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
     fetchData()
   }, [id])
 
-  if (!exhibition) {
-    return <div>読み込み中...</div>
-  }
-
-
+  
+  if (!exhibition) return <p>読み込み中...</p>;
   
   
   const currentUrl = typeof window !== "undefined" ? window.location.href : ""
@@ -150,7 +149,7 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
-              {exhibition?.tags?.map((tag) => (
+              {Array.isArray(exhibition?.tags) && exhibition.tags.map((tag) => (
                 <Badge key={tag} variant="secondary">
                   #{tag}
                 </Badge>

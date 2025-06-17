@@ -13,7 +13,7 @@ import type { Creator } from "@/types/creators"
 
 
 export default function CreatorDetailPage(props: {params: Promise<{ id: string}>}) {
-  const { id } = use(props.params)
+  const  id  = props.params
   const [creator, setCreator] = useState<Creator | null>(null)
   
 
@@ -22,7 +22,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
       try {
         const res = await fetch(`/api/exhibitions/${id}`)
         const data = await res.json()
-        setCreator(data)
+        setCreator(data || null)
       } catch (_) {
         
       }
@@ -31,9 +31,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
     fetchData()
   }, [id])
 
-  if (!creator) {
-    return <div>読み込み中...</div>
-  }
+  if (!creator) {return <div>読み込み中...</div>}
   
 
 
@@ -95,8 +93,8 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {creator.specialties.map((specialty) => (
-                    <Badge key={specialty} variant="secondary" className="text-sm">
+                  {creator.specialties?.map((specialty, index) => (
+                    <Badge key={index} variant="secondary" className="text-sm">
                       {specialty}
                     </Badge>
                   ))}
@@ -214,11 +212,8 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
                     <div>
                       <p className="font-medium mb-2">SNS</p>
                       <div className="space-y-1">
-                        {creator.socialMedia.twitter && (
-                          <p className="text-sm text-gray-600">Twitter: {creator.socialMedia.twitter}</p>
-                        )}
-                        {creator.socialMedia.instagram && (
-                          <p className="text-sm text-gray-600">Instagram: {creator.socialMedia.instagram}</p>
+                        {creator.socialMedia && (
+                          <p className="text-sm text-gray-600">Twitter: {creator.socialMedia}</p>
                         )}
                       </div>
                     </div>

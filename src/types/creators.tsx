@@ -1,18 +1,15 @@
 export type Creator = {
-    id: number;
+    id: string;
     name: string;
     type: string;
     description: string;
     longDescription: string;
-    specialties: string[];
+    specialties?: string[];
     memberCount: string;
     establishedYear: number;
     contact: string;
     website: string;
-    socialMedia: {
-      twitter: string,
-      instagram: string,
-    },
+    socialMedia: string;
      exhibitions: [
       {
         title: string,

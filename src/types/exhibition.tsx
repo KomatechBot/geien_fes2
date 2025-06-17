@@ -3,12 +3,12 @@ export type Exhibition = {
   title: string;
   creator: string;
   creatorId: string;
-  image?: {
+  image: {
     url: string;
     height: number;
     width: number;
   };
-  images?: {
+  images: {
     url: string;
     height: number;
     width: number;
