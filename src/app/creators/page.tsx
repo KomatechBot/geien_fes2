@@ -78,12 +78,13 @@ export default function CreatorsPage() {
                 <div>
                   <h4 className="font-medium text-sm mb-2">専門分野</h4>
                   <div className="flex flex-wrap gap-1">
-                    { Array.isArray(creator.specialties) &&
-                    creator.specialties.map((specialty, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs">
-                        {specialty}
-                      </Badge>
-                    ))}
+                    <div className="flex flex-wrap gap-2">
+                      { creator.specialties && (
+                        <Badge variant="secondary" className="text-sm">
+                          {creator.specialties}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
                 </div>
 

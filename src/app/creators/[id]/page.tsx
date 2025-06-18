@@ -35,8 +35,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
   
 
   if (!creator) {return <div>読み込み中...</div>}
-  
-  console.log(creator.exhibitions)
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
@@ -125,10 +124,10 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
                 <CardTitle>過去の展示</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {Array.isArray(creator.exhibitions) && creator.exhibitions.length > 0 ? (
-                    creator.exhibitions.map((exhibition) => (
-                      <div key={exhibition.id}>
+                {creator.exhibitions?.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {creator.exhibitions.map((exhibition) => (
+                      <div key={exhibition.id} className="border p-4 rounded-md bg-gray-50">
                         <h4 className="font-medium text-base">{exhibition.title}</h4>
                         {exhibition.description && (
                           <p className="text-sm text-gray-600">{exhibition.description}</p>
@@ -137,17 +136,17 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
                           <Image
                             src={exhibition.image.url}
                             alt={exhibition.title}
-                            width={1024} 
-                            height={1024}
-                            className="mt-2 rounded-lg shadow-sm max-w-full h-auto"
+                            width={800}
+                            height={600}
+                            className="mt-2 w-full h-auto object-cover rounded-lg shadow-sm border"
                           />
                         )}
                       </div>
-                    ))
-                  ) : (
-                    <p className="text-sm text-gray-500">表示可能な展示はありません。</p>
-                  )}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500">表示可能な展示はありません。</p>
+                )}
               </CardContent>
             </Card>
 
