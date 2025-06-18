@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import type { Workshop } from "../../types/workshop"
 
+
 export default function WorkshopsPage() {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 5, 15)) // 2024年6月15日
   const [workshops, setWorkshops] = useState<Workshop[]>([])

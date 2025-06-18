@@ -227,16 +227,20 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  { Array.isArray(creator.upcomingEvents) && creator.upcomingEvents.map((event, index) => (
-                    <div key={index}>
-                      <h4 className="font-medium text-sm">{event.title}</h4>
-                      <p className="text-xs text-gray-600 mb-1">
-                        {event.date} {event.time}
-                      </p>
-                      <p className="text-xs text-gray-600">{event.description}</p>
-                      {index < creator.upcomingEvents.length - 1 && <Separator className="mt-4" />}
-                    </div>
-                  ))}
+                  {Array.isArray(creator.upcomingEvents) && creator.upcomingEvents.length > 0 ? (
+                    creator.upcomingEvents.map((event, index) => (
+                      <div key={index}>
+                        <h4 className="font-medium text-sm">{event.title}</h4>
+                        <p className="text-xs text-gray-600 mb-1">
+                          {event.date} {event.time}
+                        </p>
+                        <p className="text-xs text-gray-600">{event.description}</p>
+                        {index < creator.upcomingEvents.length - 1 && <Separator className="mt-4" />}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-sm text-gray-500">現在予定されているイベントはありません。</p>
+                  )}
                 </div>
               </CardContent>
             </Card>
