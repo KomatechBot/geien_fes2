@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, { params }: Params) {
     const data = await client.get({
       endpoint: 'creators',
       contentId: id,
-      queries: { depth: 2 },
+      queries: { depth: 1 },
     })
 
     return NextResponse.json(data)

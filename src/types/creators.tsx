@@ -8,7 +8,7 @@ export type Creator = {
     description: string;
     longDescription: string;
     specialties: string;
-    memberCount: string;
+    memberCount: number;
     establishedYear: number;
     contact: string;
     website: string;

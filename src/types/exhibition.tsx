@@ -10,8 +10,8 @@ export type Exhibition = {
   };
   images: {
     url: string;
-    height: number;
-    width: number;
+    height?: number;
+    width?: number;
   }[];
   category: string;
   isCurrentlyDisplayed: boolean;

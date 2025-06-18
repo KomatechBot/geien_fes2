@@ -2,6 +2,7 @@
 
 import { useState, useEffect, use } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowLeft, User, Mail, ExternalLink, Users, Calendar, Palette } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -35,7 +36,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
 
   if (!creator) {return <div>読み込み中...</div>}
   
-
+  console.log(creator.exhibitions)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
@@ -107,12 +108,12 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
             {/* About */}
             <Card>
               <CardHeader>
-                <CardTitle>詳細について</CardTitle>
+                <CardTitle>自己紹介</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="prose max-w-none">
                   {creator.longDescription && (
-                    <p className="text-gray-700 leading-relaxed">{creator.longDescription}</p>
+                    <CardDescription className="text-gray-700 leading-relaxed">{creator.longDescription}</CardDescription>
                   )}
                 </div>
               </CardContent>
@@ -125,18 +126,26 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  { creator.exhibitions && creator.exhibitions.length > 0 && (
-                    <>
-                      <Separator />
-                      <div>
-                        <p className="font-medium mb-2">過去の展示</p>
-                        <ul className="text-sm text-gray-600 list-disc pl-5">
-                          {creator.exhibitions.map((exhibition) => (
-                            <li key={exhibition.id}>{exhibition.title}</li>
-                          ))}
-                        </ul>
+                  {Array.isArray(creator.exhibitions) && creator.exhibitions.length > 0 ? (
+                    creator.exhibitions.map((exhibition) => (
+                      <div key={exhibition.id}>
+                        <h4 className="font-medium text-base">{exhibition.title}</h4>
+                        {exhibition.description && (
+                          <p className="text-sm text-gray-600">{exhibition.description}</p>
+                        )}
+                        {exhibition.image?.url && (
+                          <Image
+                            src={exhibition.image.url}
+                            alt={exhibition.title}
+                            width={1024} 
+                            height={1024}
+                            className="mt-2 rounded-lg shadow-sm max-w-full h-auto"
+                          />
+                        )}
                       </div>
-                    </>
+                    ))
+                  ) : (
+                    <p className="text-sm text-gray-500">表示可能な展示はありません。</p>
                   )}
                 </div>
               </CardContent>
