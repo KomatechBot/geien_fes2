@@ -10,4 +10,5 @@ export type Workshop = {
     description: string;
     materials: string;
     requirements: string;
+    createdAt: number;
 };

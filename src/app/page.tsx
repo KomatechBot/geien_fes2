@@ -14,6 +14,16 @@ export default function HomePage() {
   const [featuredExhibitions, setFeaturedExhibitions] = useState<Exhibition[]>([])
   const [upcomingWorkshops, setUpcomingWorkshops] = useState<Workshop[]>([])
 
+  //最新3個の作品を展示
+  const sortedFeaturedExhibitions = [...featuredExhibitions] // 元の配列をコピー（破壊的変更を防ぐ）
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) // 新しい順
+    .slice(0, 3); // 上位3件だけ取得
+
+  //最新３個の作品を展示
+  const sortedUpcomingWorkshops = [...upcomingWorkshops] // 元の配列をコピー（破壊的変更を防ぐ）
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) // 新しい順
+    .slice(0, 2); // 上位3件だけ取得
+
 
   useEffect(() => {
       const fetchData = async() => {
@@ -62,30 +72,17 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="h-screen w-screen py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto mt-45 items-center text-center">
-           <div className="relative w-full max-w-4xl mx-auto">
-            <Image
-              src="/Geien_fes_pictures.png"
-              alt="藝苑祭の写真"
-              width={1264}   // 実際の画像サイズを指定
-              height={1128}
-              className="rounded-lg shadow-lg object-contain"
-              priority // ファーストビューでの表示を優先したい場合
-            />
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              学生たちの創作活動を展示し、創作者と利用者を繋ぐクリエイティブフェスティバル
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
-                <Link href="/exhibitions">展示を見る</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/workshops">イベントを見る</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
+      <section className="relative h-447 w-477 ">
+        {/* 背景画像 */}
+          <Image
+            src="/Geien_fes_picture.png"
+            alt="藝苑祭の写真"
+            fill
+            className="object-cover z-0" // coverで背景っぽく
+            priority
+          />
+
+
       </section>
 
       {/* Features */}
@@ -128,13 +125,13 @@ export default function HomePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-3xl font-bold text-black">注目の展示</h3>
+            <h3 className="text-3xl font-bold text-black ">注目の展示</h3>
             <Button asChild variant="outline">
               <Link href="/exhibitions">すべて見る</Link>
             </Button>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {featuredExhibitions.map((exhibition) => (
+            {sortedFeaturedExhibitions.map((exhibition) => (
               <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative">
                   <Image
@@ -178,7 +175,7 @@ export default function HomePage() {
             </Button>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            {upcomingWorkshops.map((workshop, index) => (
+            {sortedUpcomingWorkshops.map((workshop, index) => (
               <Card key={index}>
                 <CardHeader>
                   <div className="flex justify-between items-start">
