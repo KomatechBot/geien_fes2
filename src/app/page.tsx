@@ -38,22 +38,22 @@ export default function HomePage() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+    <div className="min-h-scree bg-yellow-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-1">
-              <h1 className="text-3xl font-bold text-gray-900">藝苑祭</h1>
+            <div className="flex items-center space-x-2">
+              <h1 className="text-3xl font-bold text-black">藝苑祭</h1>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <Link href="/exhibitions" className="text-gray-700 hover:text-purple-600 font-bold">
+              <Link href="/exhibitions" className="text-gray-700 hover:text-red-900 font-bold">
                 展示品
               </Link>
-              <Link href="/creators" className="text-gray-700 hover:text-purple-600 font-bold">
+              <Link href="/creators" className="text-gray-700 hover:text-red-900 font-bold">
                 制作者プロフィール
               </Link>
-              <Link href="/workshops" className="text-gray-700 hover:text-purple-600 font-bold">
+              <Link href="/workshops" className="text-gray-700 hover:text-red-900 font-bold">
                 イベントカレンダー
               </Link>
             </nav>
@@ -64,20 +64,26 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="h-screen w-screen py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto mt-45 items-center text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            創造の祭典
-            <span className="block text-purple-600">藝苑祭</span>
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            学生たちの創作活動を展示し、創作者と利用者を繋ぐクリエイティブフェスティバル
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
-              <Link href="/exhibitions">展示を見る</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/workshops">イベントを見る</Link>
-            </Button>
+           <div className="relative w-full max-w-4xl mx-auto">
+            <Image
+              src="/Geien_fes_pictures.png"
+              alt="藝苑祭の写真"
+              width={1264}   // 実際の画像サイズを指定
+              height={1128}
+              className="rounded-lg shadow-lg object-contain"
+              priority // ファーストビューでの表示を優先したい場合
+            />
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              学生たちの創作活動を展示し、創作者と利用者を繋ぐクリエイティブフェスティバル
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
+                <Link href="/exhibitions">展示を見る</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/workshops">イベントを見る</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -85,11 +91,11 @@ export default function HomePage() {
       {/* Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">藝苑祭とは？</h3>
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">お品書き</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center">
               <CardHeader>
-                <Palette className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <Palette className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>多くの制作展示</CardTitle>
               </CardHeader>
               <CardContent>
@@ -98,7 +104,7 @@ export default function HomePage() {
             </Card>
             <Card className="text-center">
               <CardHeader>
-                <Users className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <Users className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>制作者とのつながり</CardTitle>
               </CardHeader>
               <CardContent>
@@ -107,11 +113,11 @@ export default function HomePage() {
             </Card>
             <Card className="text-center">
               <CardHeader>
-                <Calendar className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <Calendar className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>体験ワークショップ</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>制作体験ができるワークショップを開催し、制作の楽しさやを共有</CardDescription>
+                <CardDescription>制作体験ができるワークショップを開催し、制作の楽しさを共有</CardDescription>
               </CardContent>
             </Card>
           </div>
@@ -122,7 +128,7 @@ export default function HomePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-3xl font-bold text-gray-900">注目の展示</h3>
+            <h3 className="text-3xl font-bold text-black">注目の展示</h3>
             <Button asChild variant="outline">
               <Link href="/exhibitions">すべて見る</Link>
             </Button>
@@ -150,7 +156,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-purple-600 font-medium">{exhibition.category}</span>
+                    <span className="text-sm text-black font-medium">{exhibition.category}</span>
                     <Button asChild size="sm" variant="outline">
                       <Link href={`/exhibitions/${exhibition.id}`}>詳細</Link>
                     </Button>
@@ -182,7 +188,7 @@ export default function HomePage() {
                         {workshop.date} {workshop.time}
                       </CardDescription>
                     </div>
-                    <Calendar className="h-6 w-6 text-purple-600" />
+                    <Calendar className="h-6 w-6 text-black" />
                   </div>
                 </CardHeader>
               </Card>

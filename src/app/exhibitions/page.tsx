@@ -51,7 +51,7 @@ export default function ExhibitionsPage() {
   const categories = ["all", "デジタルアート", "工芸", "写真", "絵画", "イラスト"]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+    <div className="min-h-screen bg-yellow-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,7 +75,7 @@ export default function ExhibitionsPage() {
         {/* Search and Filters */}
         <div className="mb-8 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-1 w-auto h-auto bg-white border-purple-700">
+            <div className="relative flex-1 w-auto h-auto bg-white border-yellow-50">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 placeholder="展示名や創作者で検索..."

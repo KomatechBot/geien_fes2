@@ -93,7 +93,7 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+    <div className="min-h-screen bg-yellow-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,7 +157,7 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{exhibition.title}</h1>
               <div className="flex items-center space-x-4 text-gray-600 mb-4">
-                <Link href={`/creators/${exhibition.creatorGroup}`} className="flex items-center hover:text-purple-600">
+                <Link href={`/creators/${exhibition.creatorGroup}`} className="flex items-center hover:text-white">
                   <User className="h-4 w-4 mr-1" />
                   {exhibition.creator}
                 </Link>
@@ -260,12 +260,12 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
             {/* Creator Info */}
             <Card>
               <CardHeader>
-                <CardTitle>創作者情報</CardTitle>
+                <CardTitle>制作者情報</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <User className="h-8 w-8 text-purple-600" />
+                  <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <User className="h-8 w-8 text-gray-600" />
                   </div>
                   <h3 className="font-semibold text-lg">{exhibition.creator}</h3>
                   <p className="text-gray-600 text-sm mb-4">{exhibition.creatorGroup}</p>

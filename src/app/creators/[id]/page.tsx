@@ -38,7 +38,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+    <div className="min-h-screen bg-yellow-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,8 +61,8 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
             <Card>
               <CardHeader>
                 <div className="flex items-start space-x-4">
-                  <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center">
-                    <User className="h-10 w-10 text-purple-600" />
+                  <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center">
+                    <User className="h-10 w-10 text-gray-600" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
@@ -159,7 +159,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
                 <ul className="space-y-2">
                   { creator.achievements &&  (
                     <li className="flex items-start space-x-2">
-                      <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0" />
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
                       <span className="text-gray-700">{creator.achievements}</span>
                     </li>
                   )}
@@ -180,7 +180,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
                   <Mail className="h-5 w-5 text-gray-400" />
                   <div>
                     <p className="font-medium">メール</p>
-                    <a href={`mailto:${creator.contact}`} className="text-purple-600 hover:underline text-sm">
+                    <a href={`mailto:${creator.contact}`} className="text-blue-500 hover:underline text-sm">
                       {creator.contact}
                     </a>
                   </div>

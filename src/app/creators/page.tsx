@@ -25,7 +25,7 @@ export default function CreatorsPage() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+    <div className="min-h-screen bg-yellow-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +38,7 @@ export default function CreatorsPage() {
                 </Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <Users className="h-8 w-8 text-purple-600" />
+                <Users className="h-8 w-8 text-black" />
                   <h1 className="text-2xl font-bold text-gray-900">制作者一覧</h1>
               </div>
             </div>
@@ -59,8 +59,8 @@ export default function CreatorsPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                      <User className="h-6 w-6 text-purple-600" />
+                    <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                      <User className="h-6 w-6 text-gray-500" />
                     </div>
                     <div>
                       <CardTitle className="text-lg">{creator.name}</CardTitle>
@@ -95,7 +95,6 @@ export default function CreatorsPage() {
                     creator.exhibitions.map((exhibition, index) => (
                       <React.Fragment key={index}>
                         <li>• {exhibition.title}</li>
-                        <li>• {exhibition.description}</li>
                       </React.Fragment>
                     ))}
                   </ul>

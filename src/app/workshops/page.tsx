@@ -72,13 +72,13 @@ export default function WorkshopsPage() {
      const isToday = dateString === todayString
 
       days.push(
-        <div key={day} className={`h-24 border border-gray-200 p-1 ${isToday ? "bg-purple-50" : "bg-white"}`}>
-          <div className={`text-sm font-medium mb-1 ${isToday ? "text-purple-600" : "text-gray-900"}`}>{day}</div>
+        <div key={day} className={`h-24 border border-gray-200 p-1 ${isToday ? "bg-red-50" : "bg-white"}`}>
+          <div className={`text-sm font-medium mb-1 ${isToday ? "text-red-500" : "text-gray-900"}`}>{day}</div>
           <div className="space-y-1">
             {dayWorkshops.slice(0, 2).map((workshop) => (
               <div
                 key={workshop.id}
-                className="text-xs bg-purple-100 text-purple-800 px-1 py-0.5 rounded truncate"
+                className="text-xs px-1 py-0.5 rounded truncate"
                 title={workshop.title}
               >
                 {workshop.time.split("-")[0]} {workshop.title}
@@ -104,7 +104,7 @@ export default function WorkshopsPage() {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+    <div className="min-h-screen bg-yellow-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,7 +117,7 @@ export default function WorkshopsPage() {
                 </Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <Calendar className="h-8 w-8 text-purple-600" />
+                <Calendar className="h-8 w-8 text-black" />
                 <h1 className="text-2xl font-bold text-gray-900">ワークショップ</h1>
               </div>
             </div>
@@ -127,7 +127,7 @@ export default function WorkshopsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="calendar" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-2 bg-gray-200">
             <TabsTrigger value="calendar">カレンダー表示</TabsTrigger>
             <TabsTrigger value="list">リスト表示</TabsTrigger>
           </TabsList>
