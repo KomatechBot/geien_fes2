@@ -228,7 +228,7 @@ export default function HomePage() {
             <div>
               <h4 className="text-lg font-semibold mb-4">お問い合わせ</h4>
               <p className="text-gray-400">
-                藝苑祭実行委員会
+                代表がいるなら記入
               </p>
               <p className="text-gray-400">
                 メールアドレスなど記入

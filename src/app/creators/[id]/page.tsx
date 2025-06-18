@@ -257,14 +257,19 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
                     メールで連絡
                   </a>
                 </Button>
+                
                 {creator.website && (
-                  <Button asChild variant="outline" className="w-full" size="sm">
-                    <a href={creator.website} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      公式サイト
-                    </a>
-                  </Button>
+                  <>
+                    <Separator />
+                    <Button asChild variant="outline" className="w-full" size="sm">
+                      <a href={creator.website} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        公式サイト
+                      </a>
+                    </Button>
+                  </>
                 )}
+                <Separator />
                 <Button asChild variant="outline" className="w-full" size="sm">
                   <Link href="/exhibitions">
                     <Palette className="h-4 w-4 mr-2" />

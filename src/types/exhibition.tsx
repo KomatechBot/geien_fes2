@@ -2,7 +2,7 @@ export type Exhibition = {
   id: string;
   title: string;
   creator: string;
-  creatorId: string;
+  creatorGroup: string;
   image: {
     url: string;
     height: number;
@@ -18,7 +18,7 @@ export type Exhibition = {
   description: string;
   longDescription: string;
   location: string;
-  displayPeriod: number;
-  openingHours: number;
+  displayPeriod: string;
+  openingHours: string;
   tags: string[];
 };

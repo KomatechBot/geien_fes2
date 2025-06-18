@@ -20,12 +20,13 @@ import QRCodeDisplay from "@/components/qrcodeDisplay"
 
 import type { Exhibition } from "@/types/exhibition"
 
-
+import type { Creator } from "@/types/creators"
 
 
 export default function ExhibitionDetailPage(props: {params: Promise<{ id: string}>}) {
   const { id } = use(props.params)
   const [exhibition, setExhibition] = useState<Exhibition | null>(null)
+  const [creators, setCreators] = useState<Creator[]>([])
   const [copied, setCopied] = useState(false)
 
 
@@ -44,8 +45,27 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
     fetchData()
   }, [id])
 
+  //プロフィールのCMS上のIDと照合するためだけのuseEffect
+  useEffect(() => {
+  const fetchCreators = async () => {
+    const res = await fetch('/api/creators')
+    const data = await res.json()
+    setCreators(data)
+  }
+  fetchCreators()
+  }, [])
+
   
   if (!exhibition) return <p>読み込み中...</p>;
+
+  //creatorsのスキーマとexhibitionsのスキーマの名前が一致するか検証している
+  const matchedCreator = creators.find(
+  (creator) => creator.name === exhibition.creator
+  )
+
+  const creatorPageLink = matchedCreator
+    ? `/creators/${matchedCreator.id}`
+    : "#" 
   
   
   const currentUrl = typeof window !== "undefined" ? window.location.href : ""
@@ -137,7 +157,7 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{exhibition.title}</h1>
               <div className="flex items-center space-x-4 text-gray-600 mb-4">
-                <Link href={`/creators/${exhibition.creatorId}`} className="flex items-center hover:text-purple-600">
+                <Link href={`/creators/${exhibition.creatorGroup}`} className="flex items-center hover:text-purple-600">
                   <User className="h-4 w-4 mr-1" />
                   {exhibition.creator}
                 </Link>
@@ -248,9 +268,9 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
                     <User className="h-8 w-8 text-purple-600" />
                   </div>
                   <h3 className="font-semibold text-lg">{exhibition.creator}</h3>
-                  <p className="text-gray-600 text-sm mb-4">デジタルアート専攻</p>
+                  <p className="text-gray-600 text-sm mb-4">{exhibition.creatorGroup}</p>
                   <Button asChild variant="outline" size="sm" className="w-full">
-                    <Link href={`/creators/${exhibition.creatorId}`}>プロフィールを見る</Link>
+                    <Link href={creatorPageLink}>プロフィールを見る</Link>
                   </Button>
                 </div>
               </CardContent>

@@ -12,19 +12,20 @@ import type { Workshop } from "../../types/workshop"
 
 
 export default function WorkshopsPage() {
-  const [currentDate, setCurrentDate] = useState(new Date(2024, 5, 15)) // 2024年6月15日
+  const [currentDate, setCurrentDate] = useState(new Date()) 
   const [workshops, setWorkshops] = useState<Workshop[]>([])
 
   useEffect(() => {
       const fetchData = async() => {
         const res = await fetch('/api/workshops')
-        const data = await res.json()
+        const data: Workshop[] = await res.json()
         setWorkshops(data)
       }
       fetchData()
     }, [])
 
   
+  // カレンダー関係
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
   }
@@ -67,7 +68,8 @@ export default function WorkshopsPage() {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateString = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`
       const dayWorkshops = getWorkshopsForDate(dateString)
-      const isToday = dateString === "2024-06-15" // 現在日として設定
+      const todayString = new Date().toISOString().split("T")[0]
+     const isToday = dateString === todayString
 
       days.push(
         <div key={day} className={`h-24 border border-gray-200 p-1 ${isToday ? "bg-purple-50" : "bg-white"}`}>
@@ -92,7 +94,13 @@ export default function WorkshopsPage() {
   }
 
   const upcomingWorkshops = workshops
-    .filter((workshop) => new Date(workshop.date) >= new Date("2024-06-15"))
+    .filter((workshop) => {
+      const today = new Date()
+      const target = new Date(workshop.date)
+
+      // 同じ日付なら true になるように、0時基準の比較
+      return target.getTime() >= new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()
+    })
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   return (
@@ -124,6 +132,7 @@ export default function WorkshopsPage() {
             <TabsTrigger value="list">リスト表示</TabsTrigger>
           </TabsList>
 
+          {/* カレンダー表示 */}
           <TabsContent value="calendar" className="space-y-6">
             {/* Calendar Header */}
             <div className="flex items-center justify-between">
@@ -138,7 +147,7 @@ export default function WorkshopsPage() {
               </div>
             </div>
 
-            {/* Calendar Grid */}
+            
             <Card>
               <CardContent className="p-0">
                 <div className="grid grid-cols-7 border-b border-gray-200">
@@ -153,6 +162,7 @@ export default function WorkshopsPage() {
             </Card>
           </TabsContent>
 
+          {/** リスト表示 */}        
           <TabsContent value="list" className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-gray-900">今後のワークショップ</h2>
@@ -201,14 +211,6 @@ export default function WorkshopsPage() {
                       </div>
                       <div>
                         <span className="font-medium">注意事項:</span> {workshop.requirements}
-                      </div>
-                    </div>
-
-                    <div className="flex justify-between items-center pt-4">
-                      <div className="text-sm text-gray-600">
-                        期間:{" "}
-                        {new Date(new Date(workshop.date).getTime() - 24 * 60 * 60 * 1000).toLocaleDateString("ja-JP")}
-                        まで
                       </div>
                     </div>
                   </CardContent>
