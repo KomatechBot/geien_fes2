@@ -78,7 +78,7 @@ export default function WorkshopsPage() {
             {dayWorkshops.slice(0, 2).map((workshop) => (
               <div
                 key={workshop.id}
-                className="text-xs px-1 py-0.5 rounded truncate"
+                className="bg-red-100 text-red-700 text-xs px-1 py-0.5 rounded truncate"
                 title={workshop.title}
               >
                 {workshop.time.split("-")[0]} {workshop.title}
@@ -127,7 +127,7 @@ export default function WorkshopsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="calendar" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 bg-gray-200">
+          <TabsList className="grid w-full grid-cols-2 bg-gray-50">
             <TabsTrigger value="calendar">カレンダー表示</TabsTrigger>
             <TabsTrigger value="list">リスト表示</TabsTrigger>
           </TabsList>
