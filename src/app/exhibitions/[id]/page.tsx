@@ -45,7 +45,7 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
     fetchData()
   }, [id])
 
-  //プロフィールのCMS上のIDと照合するためだけのuseEffect
+  //プロフィールのCMS上の名前と照合するためだけのuseEffect
   useEffect(() => {
   const fetchCreators = async () => {
     const res = await fetch('/api/creators')

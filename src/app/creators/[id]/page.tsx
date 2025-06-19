@@ -33,8 +33,8 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
   }, [id])
 
   
-
-  if (!creator) {return <div>読み込み中...</div>}
+ if (!creator) {return <div>読み込み中...</div>}
+  
 
 
   return (

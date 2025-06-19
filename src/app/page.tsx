@@ -10,6 +10,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import type { Exhibition } from "@/types/exhibition"
 import type { Workshop } from "@/types/workshop"
 
+import TopPage from "@/components/topPage"
+
 export default function HomePage() {
   const [featuredExhibitions, setFeaturedExhibitions] = useState<Exhibition[]>([])
   const [upcomingWorkshops, setUpcomingWorkshops] = useState<Workshop[]>([])
@@ -72,23 +74,17 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative h-447 w-477 ">
-        {/* 背景画像 */}
-          <Image
-            src="/Geien_fes_picture.png"
-            alt="藝苑祭の写真"
-            fill
-            className="object-cover z-0" // coverで背景っぽく
-            priority
-          />
-
-
+      <section className="relative flex h-auto w-auto justify-center items-center bg-sky-950 ">
+          <TopPage />
       </section>
 
       {/* Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">お品書き</h3>
+          <p className="flex justify-center items-center text-center text-2xl sm:text-3xl font-semibold drop-shadow-md mb-8 ">
+              学生たちの創作活動を展示し、制作者と利用者を繋ぐクリエイティブフェスティバル！
+          </p>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center">
               <CardHeader>
@@ -114,7 +110,7 @@ export default function HomePage() {
                 <CardTitle>体験ワークショップ</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>制作体験ができるワークショップを開催し、制作の楽しさを共有</CardDescription>
+                <CardDescription>制作体験ができるワークショップで制作の楽しみが共有できる！</CardDescription>
               </CardContent>
             </Card>
           </div>
