@@ -41,8 +41,10 @@ export default function TopPage() {
   return (
     <>
       {/* 左右の傘 */}
-      <UmbrellaColumn isLeft={true} />
-      <UmbrellaColumn isLeft={false} />
+      <div className="hidden sm:flex">
+        <UmbrellaColumn isLeft={true} />
+        <UmbrellaColumn isLeft={false} />
+      </div>
 
       {/* 背景画像 */}
       <Image
@@ -58,8 +60,8 @@ export default function TopPage() {
       <div className="absolute inset-0 bg-black/5 z-10" />
 
       {/* コンテンツ */}
-      <div className="absolute z-15 flex flex-col items-center justify-center h-full text-center text-white px-4 mt-178">
-        <div className="flex flex-col sm:flex-row gap-16 mt-8">
+      <div className="absolute z-15 flex flex-col items-center justify-center h-full text-center text-white px-4 mt-140 sm:mt-180">
+        <div className="flex flex-row gap-16 mt-8">
           <Button
             asChild
             size="lg"
