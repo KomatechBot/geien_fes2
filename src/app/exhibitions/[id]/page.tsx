@@ -33,13 +33,9 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
   useEffect(() => {
     if (!id) return;
     const fetchData = async () => {
-      try {
-        const res = await fetch(`/api/exhibitions/${id}`)
-        const data = await res.json()
-        setExhibition(data || null)
-      } catch (_) {
-   
-      }
+      const res = await fetch(`/api/exhibitions/${id}`)
+      const data = await res.json()
+      setExhibition(data || null)
     }
 
     fetchData()
@@ -71,24 +67,19 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
   const currentUrl = typeof window !== "undefined" ? window.location.href : ""
   const handleShare = async () => {
     if (navigator.share) {
-      try {
-        await navigator.share({
-          title: exhibition.title,
-          text: exhibition.description,
-          url: currentUrl,
-        })
-      } catch (_) {
-        
-      }
+      
+      await navigator.share({
+        title: exhibition.title,
+        text: exhibition.description,
+        url: currentUrl,
+      })
+      
     } else {
       // フォールバック: クリップボードにコピー
-      try {
-        await navigator.clipboard.writeText(currentUrl)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      } catch (_) {
-
-    }
+      await navigator.clipboard.writeText(currentUrl)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+     
   }
 }
 

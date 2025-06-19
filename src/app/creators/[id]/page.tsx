@@ -20,13 +20,9 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch(`/api/creators/${id}`)
-        const data = await res.json()
-        setCreator(data || null)
-      } catch (_) {
-        
-      }
+      const res = await fetch(`/api/creators/${id}`)
+      const data = await res.json()
+      setCreator(data || null)
     }
 
     fetchData()

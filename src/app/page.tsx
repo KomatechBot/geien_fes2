@@ -29,20 +29,15 @@ export default function HomePage() {
 
   useEffect(() => {
       const fetchData = async() => {
-       try {
         const [exhibitionsRes, workshopsRes] = await Promise.all([
           fetch('/api/exhibitions'),
           fetch('/api/workshops')
         ])
-
         const exhibitionsData = await exhibitionsRes.json()
         const workshopsData = await workshopsRes.json()
 
         setFeaturedExhibitions(exhibitionsData)
         setUpcomingWorkshops(workshopsData)
-       } catch (_) {
-
-       }
       }
       fetchData()
     }, [])
