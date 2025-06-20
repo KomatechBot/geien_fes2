@@ -125,13 +125,15 @@ export default function HomePage() {
             {sortedFeaturedExhibitions.map((exhibition) => (
               <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative">
-                  <Image
-                    src={exhibition.image?.url ?? "/placeholder.svg"}
-                    alt={exhibition.title}
-                    width={400}
-                    height={300}
-                    className="w-full h-48 object-cover"
-                  />
+                  <Link href={`/exhibitions/${exhibition.id}`}> 
+                    <Image
+                      src={exhibition.image?.url ?? "/placeholder.svg"}
+                      alt={exhibition.title}
+                      width={400}
+                      height={300}
+                      className="w-full h-48 object-cover"
+                    />
+                  </Link>
                   {exhibition.isCurrentlyDisplayed && (
                     <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                       展示中
@@ -140,7 +142,12 @@ export default function HomePage() {
                 </div>
                 <CardHeader>
                   <CardTitle className="text-lg">{exhibition.title}</CardTitle>
-                  <CardDescription>{exhibition.creator}</CardDescription>
+                  <CardDescription>
+                    {exhibition.creator}
+                  </CardDescription>
+                  <CardDescription>
+                    開催期間：{exhibition.displayPeriod}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex justify-between items-center">
@@ -173,7 +180,10 @@ export default function HomePage() {
                     <div>
                       <CardTitle className="text-lg">{workshop.title}</CardTitle>
                       <CardDescription>
-                        {workshop.date} {workshop.time}
+                        開催日：{workshop.date} 
+                      </CardDescription>
+                      <CardDescription>
+                        開催時間：{workshop.time}
                       </CardDescription>
                     </div>
                     <Calendar className="h-6 w-6 text-black" />
@@ -195,9 +205,28 @@ export default function HomePage() {
               </div>
               <p className="text-gray-400">学生たちの創作活動を展示し、制作者と利用者を繋ぐクリエイティブフェスティバル</p>
               <br />
-              <Link href="https://www.komazawa-u.ac.jp/" className="text-gray-400 hover:text-white">
-                駒澤大学について
-              </Link>
+              <div>
+                <ul>
+                  <p>
+                    Komatech
+                  </p>
+                  <li>
+                    <Link href="https://x.com/Komazawa_Tech" className="text-gray-400 hover:text-white">
+                      X(旧Twitter)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="https://www.instagram.com/koma_tech/" className="text-gray-400 hover:text-white">
+                      Instagram
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="https://www.komazawa-u.ac.jp/" className="text-gray-400 hover:text-white">
+                      駒澤大学について
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">リンク</h4>
@@ -222,15 +251,29 @@ export default function HomePage() {
             <div>
               <h4 className="text-lg font-semibold mb-4">お問い合わせ</h4>
               <p className="text-gray-400">
-                代表がいるなら記入
+                藝苑祭運営スタッフ
               </p>
               <p className="text-gray-400">
-                メールアドレスなど記入
+                Gmail: komazawa.geien.official@gmail.com
               </p>
+              <h6 className="text-lg mt-4 mb-2">SNSアカウント</h6>
+              <ul>
+                <li>
+                  <Link href="https://www.instagram.com/komazawa_geien_official/" className="text-gray-400 hover:text-white">
+                    公式Instagram
+                  </Link>
+                </li>
+                <li>
+                  <Link href="https://x.com/KlHbUr6F1O62551" className="text-gray-400 hover:text-white">
+                    公式X(旧Twitter)
+                  </Link>
+                </li>
+              </ul>
+
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 藝苑祭. All rights reserved.</p>
+            <p>&copy; 2025 藝苑祭. Komatech.</p>
           </div>
         </div>
       </footer>

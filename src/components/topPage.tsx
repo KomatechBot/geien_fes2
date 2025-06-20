@@ -41,7 +41,7 @@ export default function TopPage() {
   return (
     <>
       {/* 左右の傘 */}
-      <div className="hidden sm:flex">
+      <div className="hidden xl:flex">
         <UmbrellaColumn isLeft={true} />
         <UmbrellaColumn isLeft={false} />
       </div>
