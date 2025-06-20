@@ -114,6 +114,23 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardContent>
             </Card>
 
+            {/* Achievements */}
+            <Card>
+              <CardHeader>
+                <CardTitle>主な実績</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  { creator.achievements &&  (
+                    <li className="flex items-start space-x-2">
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700">{creator.achievements}</span>
+                    </li>
+                  )}
+                </ul>
+              </CardContent>
+            </Card>
+
             {/* Past Exhibitions */}
             <Card>
               <CardHeader>
@@ -146,22 +163,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardContent>
             </Card>
 
-            {/* Achievements */}
-            <Card>
-              <CardHeader>
-                <CardTitle>主な実績</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  { creator.achievements &&  (
-                    <li className="flex items-start space-x-2">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-gray-700">{creator.achievements}</span>
-                    </li>
-                  )}
-                </ul>
-              </CardContent>
-            </Card>
+            
           </div>
 
           {/* Sidebar */}
