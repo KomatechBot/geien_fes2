@@ -10,12 +10,13 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
 import type { Creator } from "@/types/creators"
-
+import type { Workshop } from "@/types/workshop"
 
 
 export default function CreatorDetailPage(props: {params: Promise<{ id: string}>}) {
   const { id } = use(props.params)
   const [creator, setCreator] = useState<Creator | null>(null)
+  const [workshops, setWorkshops] = useState<Workshop[]>([])
   
 
   useEffect(() => {
@@ -28,11 +29,24 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
     fetchData()
   }, [id])
 
-  
- if (!creator) {return <div>読み込み中...</div>}
-  
+  useEffect(() => {
+    const fetchWorkshops = async () => {
+      const res = await fetch(`/api/workshops/`)
+      const data = await res.json()
+      setWorkshops(data)
+    }
 
+    fetchWorkshops()
+  }, [])
 
+  if (!creator) {return <div>読み込み中...</div>}
+
+  //制作者とワークショップの指導者を一致させる
+  const matchedWorkshops = workshops.filter(
+    (ws) => ws.instructor === creator.name
+  )
+
+  
   return (
     <div className="min-h-screen bg-yellow-50">
       {/* Header */}
@@ -225,16 +239,20 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {Array.isArray(creator.upcomingEvents) && creator.upcomingEvents.length > 0 ? (
-                    creator.upcomingEvents.map((event, index) => (
-                      <div key={index}>
-                        <h4 className="font-medium text-sm">{event.title}</h4>
-                        <p className="text-xs text-gray-600 mb-1">
-                          {event.date} {event.time}
-                        </p>
-                        <p className="text-xs text-gray-600">{event.description}</p>
-                        {index < creator.upcomingEvents.length - 1 && <Separator className="mt-4" />}
-                      </div>
+                  {Array.isArray(matchedWorkshops) && matchedWorkshops.length > 0 ? (
+                    matchedWorkshops.map((workshop, index) => (
+                      <Card key={index}>
+                        <CardContent>
+                          <div>
+                            <h4 className="font-medium text-sm">{workshop.title}</h4>
+                            <p className="text-xs text-gray-600 mb-1">
+                              {workshop.date} {workshop.time}
+                            </p>
+                            <p className="text-xs text-gray-600">{workshop.description}</p>
+                            {index < matchedWorkshops.length - 1 && <Separator className="mt-4" />}
+                          </div>
+                        </CardContent>
+                      </Card>
                     ))
                   ) : (
                     <p className="text-sm text-gray-500">現在予定されているイベントはありません。</p>

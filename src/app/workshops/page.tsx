@@ -6,6 +6,7 @@ import { ArrowLeft, Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "l
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import type { Workshop } from "../../types/workshop"
@@ -72,21 +73,42 @@ export default function WorkshopsPage() {
      const isToday = dateString === todayString
 
       days.push(
-        <div key={day} className={`h-24 border border-gray-200 p-1 ${isToday ? "bg-red-50" : "bg-white"}`}>
-          <div className={`text-sm font-medium mb-1 ${isToday ? "text-red-500" : "text-gray-900"}`}>{day}</div>
-          <div className="space-y-1">
-            {dayWorkshops.slice(0, 2).map((workshop) => (
-              <div
-                key={workshop.id}
-                className="bg-red-100 text-red-700 text-xs px-1 py-0.5 rounded truncate"
-                title={workshop.title}
-              >
-                {workshop.time.split("-")[0]} {workshop.title}
+        <Popover key={day}>
+          <PopoverTrigger>
+            <div className={`h-24 border border-gray-200 p-1 ${isToday ? "bg-red-50" : "bg-white"}`}>
+              <div className={`text-sm font-medium mb-1 ${isToday ? "text-red-500" : "text-gray-900"}`}>{day}</div>
+              <div className="space-y-1">
+                {dayWorkshops.slice(0, 2).map((workshop) => (
+                  <div
+                    key={workshop.id}
+                    className="bg-red-100 text-red-700 text-xs px-1 py-0.5 rounded truncate"
+                    title={workshop.title}
+                  >
+                    ・{workshop.title}
+                  </div>
+                ))}
+                {dayWorkshops.length > 2 && <div className="text-xs text-gray-500">+{dayWorkshops.length - 2}件</div>}
               </div>
-            ))}
-            {dayWorkshops.length > 2 && <div className="text-xs text-gray-500">+{dayWorkshops.length - 2}件</div>}
-          </div>
-        </div>,
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 z-50">
+            {dayWorkshops.length > 0 ? (
+              <ul className="space-y-2 max-h-64 overflow-y-auto">
+                {dayWorkshops.map((workshop) => (
+                  <li key={workshop.id} className="border-b pb-1">
+                    <p className="font-semibold">{workshop.title}</p>
+                    <p className="text-sm text-gray-600">
+                      {workshop.time} ({workshop.duration}分)
+                    </p>
+                    <p className="text-sm text-gray-500">{workshop.location}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-500">この日のイベントはありません。</p>
+            )}
+          </PopoverContent>
+        </Popover>
       )
     }
 
