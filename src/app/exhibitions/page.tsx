@@ -119,6 +119,7 @@ export default function ExhibitionsPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExhibitions.map((exhibition) => (
             <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <Link href={`/exhibitions/${exhibition.id}`}>
               <div className="relative">
                 <Image
                   src={exhibition.image?.url ?? "/placeholder.svg"}
@@ -135,6 +136,7 @@ export default function ExhibitionsPage() {
                   )}
                 </div>
               </div>
+              <br />
               <CardHeader>
                 <CardTitle className="text-lg">{exhibition.title}</CardTitle>
                 <CardDescription>{exhibition.creator}</CardDescription>
@@ -148,6 +150,7 @@ export default function ExhibitionsPage() {
                   </Button>
                 </div>
               </CardContent>
+              </Link>
             </Card>
           ))}
         </div>

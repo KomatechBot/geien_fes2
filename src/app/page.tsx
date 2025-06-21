@@ -80,8 +80,8 @@ export default function HomePage() {
           <p className="flex justify-center items-center text-center text-2xl sm:text-3xl font-semibold drop-shadow-md mb-8 ">
               学生たちの創作活動を展示し、制作者と利用者を繋ぐクリエイティブフェスティバル！
           </p>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center">
+          <div className="grid md:grid-cols-3 gap-20">
+            <Card className="text-center border-none shadow-none">
               <CardHeader>
                 <Palette className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>多くの制作展示</CardTitle>
@@ -90,7 +90,7 @@ export default function HomePage() {
                 <CardDescription>デジタルアート、文学、デザートなど様々な制作物の展示や試食ができます！</CardDescription>
               </CardContent>
             </Card>
-            <Card className="text-center">
+            <Card className="text-center border-none shadow-none">
               <CardHeader>
                 <Users className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>制作者とのつながり</CardTitle>
@@ -99,7 +99,7 @@ export default function HomePage() {
                 <CardDescription>製作者の活動内容を通じて、制作者と利用者との交流ができます！</CardDescription>
               </CardContent>
             </Card>
-            <Card className="text-center">
+            <Card className="text-center border-none shadow-none">
               <CardHeader>
                 <Calendar className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>体験ワークショップ</CardTitle>
@@ -122,10 +122,10 @@ export default function HomePage() {
             </Button>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {sortedFeaturedExhibitions.map((exhibition) => (
+            {sortedFeaturedExhibitions.map((exhibition) => ( 
               <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <Link href={`/exhibitions/${exhibition.id}`}>
                 <div className="relative">
-                  <Link href={`/exhibitions/${exhibition.id}`}> 
                     <Image
                       src={exhibition.image?.url ?? "/placeholder.svg"}
                       alt={exhibition.title}
@@ -133,13 +133,15 @@ export default function HomePage() {
                       height={300}
                       className="w-full h-48 object-cover"
                     />
-                  </Link>
+                  
                   {exhibition.isCurrentlyDisplayed && (
                     <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                       展示中
                     </div>
                   )}
+                  
                 </div>
+                <br />
                 <CardHeader>
                   <CardTitle className="text-lg">{exhibition.title}</CardTitle>
                   <CardDescription>
@@ -157,6 +159,7 @@ export default function HomePage() {
                     </Button>
                   </div>
                 </CardContent>
+                </Link>
               </Card>
             ))}
           </div>
@@ -169,12 +172,13 @@ export default function HomePage() {
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-3xl font-bold text-gray-900">今後のイベント</h3>
             <Button asChild variant="outline">
-              <Link href="/workshops">カレンダーを見る</Link>
+              <Link href="/workshops">カレンダーで見る</Link>
             </Button>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {sortedUpcomingWorkshops.map((workshop, index) => (
               <Card key={index}>
+                <Link href="/workshops">
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
@@ -186,10 +190,11 @@ export default function HomePage() {
                         開催時間：{workshop.time}
                       </CardDescription>
                     </div>
-                    <Calendar className="h-6 w-6 text-black" />
                   </div>
                 </CardHeader>
+                </Link>
               </Card>
+
             ))}
           </div>
         </div>
