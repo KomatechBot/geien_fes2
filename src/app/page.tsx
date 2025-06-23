@@ -12,6 +12,8 @@ import type { Workshop } from "@/types/workshop"
 
 import TopPage from "@/components/topPage"
 
+
+
 export default function HomePage() {
   const [featuredExhibitions, setFeaturedExhibitions] = useState<Exhibition[]>([])
   const [upcomingWorkshops, setUpcomingWorkshops] = useState<Workshop[]>([])
@@ -285,3 +287,7 @@ export default function HomePage() {
     </div>
   )
 }
+
+
+
+
