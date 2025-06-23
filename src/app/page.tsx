@@ -126,7 +126,6 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-6">
             {sortedFeaturedExhibitions.map((exhibition) => ( 
               <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <Link href={`/exhibitions/${exhibition.id}`}>
                 <div className="relative">
                     <Image
                       src={exhibition.image?.url ?? "/placeholder.svg"}
@@ -145,6 +144,7 @@ export default function HomePage() {
                 </div>
                 <br />
                 <CardHeader>
+                  <Link href={`/exhibitions/${exhibition.id}`}>
                   <CardTitle className="text-lg">{exhibition.title}</CardTitle>
                   <CardDescription>
                     {exhibition.creator}
@@ -152,6 +152,7 @@ export default function HomePage() {
                   <CardDescription>
                     開催期間：{exhibition.displayPeriod}
                   </CardDescription>
+                  </Link>
                 </CardHeader>
                 <CardContent>
                   <div className="flex justify-between items-center">
@@ -161,7 +162,6 @@ export default function HomePage() {
                     </Button>
                   </div>
                 </CardContent>
-                </Link>
               </Card>
             ))}
           </div>
