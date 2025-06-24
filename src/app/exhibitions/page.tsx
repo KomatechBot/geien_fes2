@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 
-//スキーマ宣言関係
+//　検索関係のスキーマ宣言
 import { filterSchema } from "@/schemas/filterSchema";
 
 //Exhibitionsの型定義
