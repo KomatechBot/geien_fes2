@@ -10,8 +10,6 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 
-//　検索関係のスキーマ宣言
-import { filterSchema } from "@/schemas/filterSchema";
 
 //Exhibitionsの型定義
 import type { Exhibition } from "@/types/exhibition"
@@ -34,20 +32,9 @@ export default function ExhibitionsPage() {
     fetchData();
   }, []);
 
-  const filterValidation = filterSchema.safeParse({
-    searchTerm,
-    categoryFilter,
-    displayFilter,
-  });
-
-  if (!filterValidation.success) {
-    console.error("無効なフィルター条件", filterValidation.error?.flatten());
-  }
-
   
 
-  const filteredExhibitions = filterValidation.success
-   ? exhibitions.filter ((exhibition) => {
+  const filteredExhibitions = exhibitions.filter ((exhibition) => {
     const matchesSearch =
       exhibition.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exhibition.creator.toLowerCase().includes(searchTerm.toLowerCase());
@@ -59,7 +46,7 @@ export default function ExhibitionsPage() {
 
     return matchesSearch && matchesCategory && matchesDisplay
   })
-  : [];
+
 
   const categories = ["all", "デジタルアート", "工芸", "写真", "絵画", "イラスト"]
 

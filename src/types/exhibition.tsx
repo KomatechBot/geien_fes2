@@ -20,6 +20,6 @@ export type Exhibition = {
   location: string;
   displayPeriod: string;
   openingHours: string;
-  tags: string[];
+  tags: string;
   createdAt: string;
 };

@@ -19,8 +19,9 @@ import {
 import QRCodeDisplay from "@/components/qrcodeDisplay"
 
 import type { Exhibition } from "@/types/exhibition"
-
 import type { Creator } from "@/types/creators"
+
+
 
 
 export default function ExhibitionDetailPage(props: {params: Promise<{ id: string}>}) {
@@ -31,24 +32,23 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 
 
   useEffect(() => {
-    if (!id) return;
     const fetchData = async () => {
-      const res = await fetch(`/api/exhibitions/${id}`)
-      const data = await res.json()
+      const res = await fetch(`/api/exhibitions/${id}`);
+      const data = await res.json();
       setExhibition(data || null)
     }
-
-    fetchData()
+  fetchData();
   }, [id])
 
   //プロフィールのCMS上の名前と照合するためだけのuseEffect
   useEffect(() => {
     const fetchCreators = async () => {
-    const res = await fetch('/api/creators')
-    const data = await res.json()
-    setCreators(data)
-  }
-  fetchCreators()
+  
+      const res = await fetch("/api/creators");
+      const data = await res.json();
+      setCreators(data)
+    }
+  fetchCreators();
   }, [])
 
   
@@ -56,12 +56,12 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 
   //creatorsのスキーマとexhibitionsのスキーマの名前が一致するか検証している
   const matchedCreator = creators.find(
-  (creator) => creator.name === exhibition.creator
-  )
+    (creator) => creator.name === exhibition.creator
+  ); 
 
   const creatorPageLink = matchedCreator
     ? `/creators/${matchedCreator.id}`
-    : "#" 
+    : "#";
   
   
   const currentUrl = typeof window !== "undefined" ? window.location.href : ""
@@ -173,11 +173,14 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
               </CardHeader>
               <CardContent>
                 <div className="prose max-w-none">
-                  {exhibition.longDescription.split("\n\n").map((paragraph, index) => (
-                    <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                      {paragraph}
-                    </p>
-                  ))}
+                  {exhibition.longDescription ? (
+                    exhibition.longDescription.split("\n\n").map((paragraph, index) => (
+                      <p key={index} className="mb-4 text-gray-700 leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))) : (
+                      <p className="text-gray-400">説明がまだ登録されていません。</p>
+                    )}
                 </div>
               </CardContent>
             </Card>
