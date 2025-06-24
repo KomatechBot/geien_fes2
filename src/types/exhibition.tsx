@@ -21,5 +21,5 @@ export type Exhibition = {
   displayPeriod: string;
   openingHours: string;
   tags: string[];
-  createdAt: number;
+  createdAt: string;
 };

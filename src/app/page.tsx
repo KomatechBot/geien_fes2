@@ -15,10 +15,42 @@ import TopPage from "@/components/topPage"
 
 
 export default function HomePage() {
-  const [featuredExhibitions, setFeaturedExhibitions] = useState<Exhibition[]>([])
+  const [featuredExhibitions, setFeaturedExhibitions] = useState<Exhibition[]>([]);
   const [upcomingWorkshops, setUpcomingWorkshops] = useState<Workshop[]>([])
 
-  //最新3個の作品を展示
+  useEffect(() => {
+      const fetchData = async() => {
+        try {
+          const [exhibitionsRes, workshopsRes] = await Promise.all([
+            fetch('/api/exhibitions'),
+            fetch('/api/workshops')
+          ])
+          const exhibitionsData = await exhibitionsRes.json()
+          const workshopsData = await workshopsRes.json()
+          
+
+
+          if (Array.isArray( exhibitionsData && workshopsData)) {
+              setFeaturedExhibitions(exhibitionsData)
+              setUpcomingWorkshops(workshopsData)
+          } else {
+              console.error("APIレスポンスが配列ではありません", exhibitionsData, workshopsData);
+              setFeaturedExhibitions([]);
+              setUpcomingWorkshops([]);
+            } 
+          }
+          catch (err) {
+            console.error("API通信エラー:", err);
+            setFeaturedExhibitions([]);
+            setUpcomingWorkshops([]);
+          }
+
+    }
+    fetchData()
+  }, [])
+
+  
+    //最新3個の作品を展示
   const sortedFeaturedExhibitions = [...featuredExhibitions] // 元の配列をコピー（破壊的変更を防ぐ）
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) // 新しい順
     .slice(0, 3); // 上位3件だけ取得
@@ -27,22 +59,6 @@ export default function HomePage() {
   const sortedUpcomingWorkshops = [...upcomingWorkshops] // 元の配列をコピー（破壊的変更を防ぐ）
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) // 新しい順
     .slice(0, 2); // 上位3件だけ取得
-
-
-  useEffect(() => {
-      const fetchData = async() => {
-        const [exhibitionsRes, workshopsRes] = await Promise.all([
-          fetch('/api/exhibitions'),
-          fetch('/api/workshops')
-        ])
-        const exhibitionsData = await exhibitionsRes.json()
-        const workshopsData = await workshopsRes.json()
-
-        setFeaturedExhibitions(exhibitionsData)
-        setUpcomingWorkshops(workshopsData)
-      }
-      fetchData()
-    }, [])
 
 
 

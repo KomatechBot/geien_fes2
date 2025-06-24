@@ -10,10 +10,11 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 
+//スキーマ宣言関係
+import { filterSchema } from "@/schemas/filterSchema";
 
 //Exhibitionsの型定義
 import type { Exhibition } from "@/types/exhibition"
-
 
 
 export default function ExhibitionsPage() {
@@ -30,23 +31,35 @@ export default function ExhibitionsPage() {
       const data = await res.json()
       setExhibitions(data)
     }
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
+
+  const filterValidation = filterSchema.safeParse({
+    searchTerm,
+    categoryFilter,
+    displayFilter,
+  });
+
+  if (!filterValidation.success) {
+    console.error("無効なフィルター条件", filterValidation.error?.flatten());
+  }
 
   
 
-  const filteredExhibitions = exhibitions.filter((exhibition) => {
+  const filteredExhibitions = filterValidation.success
+   ? exhibitions.filter ((exhibition) => {
     const matchesSearch =
       exhibition.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      exhibition.creator.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = categoryFilter === "all" || exhibition.category === categoryFilter
+      exhibition.creator.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = categoryFilter === "all" || exhibition.category === categoryFilter;
     const matchesDisplay =
       displayFilter === "all" ||
       (displayFilter === "current" && exhibition.isCurrentlyDisplayed) ||
-      (displayFilter === "upcoming" && !exhibition.isCurrentlyDisplayed)
+      (displayFilter === "upcoming" && !exhibition.isCurrentlyDisplayed);
 
     return matchesSearch && matchesCategory && matchesDisplay
   })
+  : [];
 
   const categories = ["all", "デジタルアート", "工芸", "写真", "絵画", "イラスト"]
 
@@ -119,7 +132,6 @@ export default function ExhibitionsPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExhibitions.map((exhibition) => (
             <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <Link href={`/exhibitions/${exhibition.id}`}>
               <div className="relative">
                 <Image
                   src={exhibition.image?.url ?? "/placeholder.svg"}
@@ -138,8 +150,10 @@ export default function ExhibitionsPage() {
               </div>
               <br />
               <CardHeader>
+                <Link href={`/exhibitions/${exhibition.id}`}>
                 <CardTitle className="text-lg">{exhibition.title}</CardTitle>
                 <CardDescription>{exhibition.creator}</CardDescription>
+                </Link>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600 mb-4">{exhibition.description}</p>
@@ -150,7 +164,6 @@ export default function ExhibitionsPage() {
                   </Button>
                 </div>
               </CardContent>
-              </Link>
             </Card>
           ))}
         </div>
