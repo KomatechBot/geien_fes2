@@ -1,14 +1,4 @@
-export type Workshop = {
-    id: string;
-    title: string;
-    instructor: string;
-    date: string;
-    time: string;
-    duration: number;
-    location: string;
-    difficulty: string;
-    description: string;
-    materials: string;
-    requirements: string;
-    createdAt: string;
-};
+import { z } from "zod"
+import { WorkshopSchema } from "@/schemas/workshopSchemas";
+
+export type Workshop = z.infer<typeof WorkshopSchema>

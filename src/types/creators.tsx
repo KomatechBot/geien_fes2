@@ -1,19 +1,4 @@
-import { Exhibition } from "./exhibition";
-import { Workshop } from "./workshop";
+import { z } from "zod"
+import { CreatorSchema } from "@/schemas/creatorSchema";
 
-export type Creator = {
-    id: string;
-    name: string;
-    type: string;
-    description: string;
-    longDescription: string;
-    specialties: string;
-    memberCount: number;
-    establishedYear: number;
-    contact: string;
-    website: string;
-    socialMedia: string;
-    exhibitions: Exhibition[];
-    upcomingEvents: Workshop[];
-    achievements: string;
-}
+export type Creator = z.infer<typeof CreatorSchema>
