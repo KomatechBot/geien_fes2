@@ -14,6 +14,9 @@ import { Badge } from "@/components/ui/badge"
 //Exhibitionsの型定義
 import type { Exhibition } from "@/types/exhibition"
 
+//スキーマ定義
+import { ExhibitionFilterSchema } from "@/schemas/exhibitionfilterSchema"
+
 
 export default function ExhibitionsPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -31,6 +34,21 @@ export default function ExhibitionsPage() {
     }
     fetchData();
   }, []);
+
+// 例: URLパラメータやステート値をチェック
+try {
+  const safeFilter = ExhibitionFilterSchema.parse({
+    searchTerm,
+    categoryFilter,
+    displayFilter,
+  });
+
+  // フィルター処理に安心して使える
+  console.log(safeFilter);
+
+} catch (e) {
+  console.error("フィルターの形式が不正です", e);
+}
 
   
 
