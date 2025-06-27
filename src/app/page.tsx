@@ -65,8 +65,8 @@ export default function HomePage() {
   return (
     <div className="min-h-scree bg-yellow-50">
       {/* Header */}
-      <header className="shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="hidden md:flex shadow-sm border-b">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center space-x-2">
               <h1 className="text-3xl font-bold text-black">藝苑祭</h1>
@@ -287,7 +287,7 @@ export default function HomePage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="https://x.com/KlHbUr6F1O62551" className="text-gray-400 hover:text-white">
+                  <Link href="https://x.com/komazawa_geien" className="text-gray-400 hover:text-white">
                     公式X(旧Twitter)
                   </Link>
                 </li>
