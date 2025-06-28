@@ -159,6 +159,13 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
+              {typeof exhibition?.tags === 'string' &&
+                exhibition.tags.split('　').map((tag) => (
+                  <Badge key={tag} variant="secondary">
+                    #{tag}
+                  </Badge>
+                ))}
+              
               {Array.isArray(exhibition?.tags) && exhibition.tags.map((tag) => (
                 <Badge key={tag} variant="secondary">
                   #{tag}
