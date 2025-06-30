@@ -249,6 +249,11 @@ export default function HomePage() {
                       駒澤大学について
                     </Link>
                   </li>
+                  <li>
+                    <Link href="https://my-portfolio-phi-tan-95.vercel.app/" className="text-gray-400 hover:text-white">
+                      Web作成者について
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
