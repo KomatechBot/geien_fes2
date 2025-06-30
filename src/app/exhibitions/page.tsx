@@ -137,7 +137,7 @@ try {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExhibitions.map((exhibition) => (
             <Card key={exhibition.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="relative">
+              <div className="relative w-full h-full">
                 <Image
                   src={exhibition.image?.url ?? "/placeholder.svg"}
                   alt={exhibition.title}
@@ -145,7 +145,7 @@ try {
                   height={300}
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute top-2 right-2">
+                <div className="absolute top-1 right-2">
                   {exhibition.isCurrentlyDisplayed ? (
                     <Badge className="bg-green-500 hover:bg-green-600">展示中</Badge>
                   ) : (
@@ -153,7 +153,6 @@ try {
                   )}
                 </div>
               </div>
-              <br />
               <CardHeader>
                 <Link href={`/exhibitions/${exhibition.id}`}>
                 <CardTitle className="text-lg">{exhibition.title}</CardTitle>

@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Button } from "./ui/button"
-import Link from "next/link"
+
 
 const UmbrellaColumn = ({ isLeft }: { isLeft: boolean }) => {
   const umbrellas = [0, 1, 2];
@@ -27,8 +26,8 @@ const UmbrellaColumn = ({ isLeft }: { isLeft: boolean }) => {
           <Image
             src="/umbrella.png"
             alt={`傘${isLeft ? "左" : "右"}-${id}`}
-            width={300}
-            height={300}
+            width={249}
+            height={250}
             className="rotate-180"
           />
         </motion.div>
@@ -48,7 +47,7 @@ export default function TopPage() {
 
       {/* 背景画像 */}
       <Image
-        src="/Geien_fes_picture.png"
+        src="/Geien_poster.png"
         alt="藝苑祭の写真"
         height={1000}
         width={800}
@@ -59,26 +58,7 @@ export default function TopPage() {
       {/* オーバーレイ */}
       <div className="absolute inset-0 bg-black/5 z-10" />
 
-      {/* コンテンツ */}
-      <div className="absolute z-15 flex flex-col items-center justify-center h-full text-center text-white px-4 mt-87 sm:mt-180">
-        <div className="flex flex-row gap-16 mt-8">
-          <Button
-            asChild
-            size="lg"
-            className="bg-red-700 hover:bg-red-800 transform transition-transform duration-300 hover:-translate-y-1"
-          >
-            <Link href="/exhibitions">展示を見る</Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="bg-red-700 hover:bg-red-800 border-red-700 hover:border-red-800 hover:text-white transform transition-transform duration-300 hover:-translate-y-1"
-          >
-            <Link href="/workshops">イベントを見る</Link>
-          </Button>
-        </div>
-      </div>
+      
     </>
   );
 }

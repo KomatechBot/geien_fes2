@@ -131,11 +131,11 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
               <Image
                 src={exhibition.image?.url ?? "/placeholder.svg"}
                 alt={exhibition.title}
-                width={800}
-                height={600}
-                className="w-full h-96 object-cover rounded-lg"
+                width={1600}
+                height={1200}
+                className="w-full h-96 object-contain rounded-lg"
               />
-              <div className="absolute top-4 left-4">
+              <div className="absolute -left-2">
                 {exhibition.isCurrentlyDisplayed ? (
                   <Badge className="bg-green-500 hover:bg-green-600">展示中</Badge>
                 ) : (
@@ -198,26 +198,29 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
                 <CardTitle>その他の作品画像</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {exhibition.images && exhibition.images.length > 0 ? (
                     exhibition.images.map((image, index) => (
-                      <Image
-                        key={index}
-                        src={image.url}
-                        alt={`${exhibition.title} - 画像 ${index + 1}`}
-                        width={image.width}
-                        height={image.height}
-                        className="w-full h-32 object-cover rounded-lg"
-                      />
+                      <div key={index} className="relative h-auto overflow-hidden ">
+                        <Image
+                          key={index}
+                          src={image.url}
+                          alt={`${exhibition.title} - 画像 ${index + 1}`}
+                          width={1600} // 実際の画像サイズに合わせる
+                          height={1200}
+                          className="w-full h-full object-contain rounded-lg"
+                        />
+                      </div>
                     ))
                   ) : (
-                    <Image
-                      src="/placeholder.svg"
-                      alt="No image"
-                      width={300}
-                      height={200}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
+                    <div className="relative w-full overflow-hidden rounded-lg">
+                      <Image
+                        src="/placeholder.svg"
+                        alt="No image"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   )}
                 </div>
               </CardContent>

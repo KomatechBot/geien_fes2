@@ -59,8 +59,8 @@ export default function CreatorsPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                      <User className="h-6 w-6 text-gray-500" />
+                    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                      <User className="h-6 w-6 text-gray-800" />
                     </div>
                     <div>
                       <CardTitle className="text-lg">{creator.name}</CardTitle>

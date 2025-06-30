@@ -25,6 +25,6 @@ export const ExhibitionSchema = z.object({
   displayPeriod: z.string(),
   openingHours: z.string(),
   tags: z.string(),
-  createdAt: z.string(), // ISO 8601日付として受け取るなら z.coerce.date() にしてもOK
+  createdAt: z.string(), 
 });
 

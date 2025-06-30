@@ -63,7 +63,7 @@ export default function HomePage() {
 
 
   return (
-    <div className="min-h-scree bg-yellow-50">
+    <div className="min-h-screen bg-yellow-50">
       {/* Header */}
       <header className="shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,7 +71,7 @@ export default function HomePage() {
             <div className="flex items-center space-x-2">
               <h1 className="text-3xl font-bold text-black">藝苑祭</h1>
             </div>
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden sm:flex space-x-8">
               <Link href="/exhibitions" className="text-gray-700 hover:text-red-900 font-bold">
                 展示品
               </Link>
@@ -94,7 +94,7 @@ export default function HomePage() {
       {/* Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">お品書き</h3>
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">藝苑祭とは？</h3>
           <p className="flex justify-center items-center text-center text-2xl sm:text-3xl font-semibold drop-shadow-md mb-8 ">
               学生たちの創作活動を展示し、制作者と利用者を繋ぐクリエイティブフェスティバル！
           </p>
@@ -105,7 +105,7 @@ export default function HomePage() {
                 <CardTitle>多くの制作展示</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>デジタルアート、文学、デザートなど様々な制作物の展示や試食ができます！</CardDescription>
+                <CardDescription>デジタルアート、文学、デザートなど様々な制作物を見たり、試食ができます！</CardDescription>
               </CardContent>
             </Card>
             <Card className="text-center border-none shadow-none">
@@ -114,7 +114,7 @@ export default function HomePage() {
                 <CardTitle>制作者とのつながり</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>製作者の活動内容を通じて、制作者と利用者との交流ができます！</CardDescription>
+                <CardDescription>制作者の活動内容を通じて、制作者と利用者との交流ができます！</CardDescription>
               </CardContent>
             </Card>
             <Card className="text-center border-none shadow-none">
