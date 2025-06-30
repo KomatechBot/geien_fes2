@@ -8,6 +8,7 @@ const categoryOptions = [
   "写真",
   "絵画",
   "イラスト",
+  "ゲーム",
 ] as const;
 
 const displayOptions = ["all", "current", "upcoming"] as const;
