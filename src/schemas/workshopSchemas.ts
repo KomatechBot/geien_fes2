@@ -8,7 +8,7 @@ export const WorkshopSchema = z.object({
   time: z.string(), // "HH:mm" フォーマットにしたい場合も refine() や正規表現で制限可能
   duration: z.number(), // 分単位など明確にしたければコメント等で補足
   location: z.string(),
-  difficulty: z.string(), // 難易度を限定したければ z.enum(["初級", "中級", "上級"] などもOK)
+  difficulty: z.string(), 
   description: z.string(),
   materials: z.string(),
   requirements: z.string(),

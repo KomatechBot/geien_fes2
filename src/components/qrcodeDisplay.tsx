@@ -20,7 +20,7 @@ const QRCodeDisplay: FC<QRCodeProps> = (props) => {
             fgColor={"#000000"}
             level={"L"}
             imageSettings={{
-                src: "/favicon.ico",
+                src: "none",
                 x: undefined,
                 y: undefined,
                 height: 24,
