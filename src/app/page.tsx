@@ -243,6 +243,7 @@ export default function HomePage() {
                       Instagram
                     </Link>
                   </li>
+                  <br />
                   <li>
                     <Link href="https://www.komazawa-u.ac.jp/" className="text-gray-400 hover:text-white">
                       駒澤大学について
