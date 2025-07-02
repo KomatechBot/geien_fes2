@@ -3,6 +3,7 @@
 import { FC } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
+
 interface QRCodeProps {
     url: string;
 }
@@ -26,12 +27,14 @@ const QRCodeDisplay: FC<QRCodeProps> = (props) => {
                 height: 24,
                 width: 24,
                 excavate: true,
+              
             }}
           />
         </div>
       </div>
       <p className="text-sm text-gray-600 text-center max-w-xs">このQRコードをスキャンして展示ページにアクセス</p>
       <p className="text-xs text-gray-400 break-all max-w-xs text-center">{props.url}</p>
+      
     </div>
   )
 }
