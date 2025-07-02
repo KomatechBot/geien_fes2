@@ -3,8 +3,6 @@ import { z } from "zod";
 // カテゴリ一覧（必要なら共通化も検討可）
 const categoryOptions = [
   "all",
-  "デジタルアート",
-  "工芸",
   "写真",
   "絵画",
   "イラスト",
