@@ -148,10 +148,10 @@ export default function WorkshopsPage() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Tabs defaultValue="calendar" className="space-y-6">
+        <Tabs defaultValue="list" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2 bg-gray-50">
-            <TabsTrigger value="calendar">カレンダー表示</TabsTrigger>
             <TabsTrigger value="list">リスト表示</TabsTrigger>
+            <TabsTrigger value="calendar">カレンダー表示</TabsTrigger>
           </TabsList>
 
           {/* カレンダー表示 */}
