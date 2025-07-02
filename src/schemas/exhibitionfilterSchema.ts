@@ -9,6 +9,7 @@ const categoryOptions = [
   "絵画",
   "イラスト",
   "ゲーム",
+  "小説",
   "その他",
 ] as const;
 

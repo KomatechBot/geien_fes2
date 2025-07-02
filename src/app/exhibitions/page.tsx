@@ -66,7 +66,7 @@ try {
   })
 
 
-  const categories = ["all", "デジタルアート", "工芸", "写真", "絵画", "イラスト", "ゲーム", "その他"]
+  const categories = ["all", "デジタルアート", "工芸", "写真", "絵画", "イラスト", "ゲーム","小説","その他"]
 
   return (
     <div className="min-h-screen bg-yellow-50">
