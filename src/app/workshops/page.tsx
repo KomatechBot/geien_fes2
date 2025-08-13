@@ -16,6 +16,7 @@ export default function WorkshopsPage() {
   const [currentDate, setCurrentDate] = useState(new Date()) 
   const [workshops, setWorkshops] = useState<Workshop[]>([])
 
+  
   useEffect(() => {
       const fetchData = async() => {
         const res = await fetch('/api/workshops')
@@ -24,7 +25,7 @@ export default function WorkshopsPage() {
       }
       fetchData()
     }, [])
-
+  
   
   // カレンダー関係
   const getDaysInMonth = (date: Date) => {
@@ -40,7 +41,11 @@ export default function WorkshopsPage() {
   }
 
   const getWorkshopsForDate = (date: string) => {
-    return workshops.filter((workshop) => workshop.date === date)
+    return workshops.filter((workshop) => {
+      const d = new Date(workshop.date)
+      const formatted = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
+      return formatted === date
+    })
   }
 
   const navigateMonth = (direction: "prev" | "next") => {
@@ -193,51 +198,54 @@ export default function WorkshopsPage() {
 
             <div className="grid gap-6">
               {upcomingWorkshops.map((workshop) => (
-                <Card key={workshop.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <CardTitle className="text-xl">{workshop.title}</CardTitle>
-                        <CardDescription className="text-base mt-1">講師: {workshop.instructor}</CardDescription>
+                <Link key={workshop.id} href={`/workshops/${workshop.id}`} className="block">
+                  <Card className="hover:shadow-lg transition-shadow">
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-xl">{workshop.title}</CardTitle>
+                          <CardDescription className="text-base mt-1">講師: {workshop.instructor}</CardDescription>
+                        </div>
+                        <Badge variant={workshop.difficulty === "初心者向け" ? "default" : "secondary"}>
+                          {workshop.difficulty}
+                        </Badge>
                       </div>
-                      <Badge variant={workshop.difficulty === "初心者向け" ? "default" : "secondary"}>
-                        {workshop.difficulty}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-gray-700">{workshop.description}</p>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-700">{workshop.description}</p>
 
-                    <div className="grid md:grid-cols-2 gap-4 text-sm">
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="h-4 w-4 text-gray-400" />
-                          <span>{new Date(workshop.date).toLocaleDateString("ja-JP")}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Clock className="h-4 w-4 text-gray-400" />
-                          <span>
-                            {workshop.time} ({workshop.duration}分)
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="h-4 w-4 text-gray-400" />
-                          <span>{workshop.location}</span>
+                      <div className="grid md:grid-cols-2 gap-4 text-sm">
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="h-4 w-4 text-gray-400" />
+                            <span>{new Date(workshop.date).toLocaleDateString("ja-JP")}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Clock className="h-4 w-4 text-gray-400" />
+                            <span>
+                              {workshop.time} ({workshop.duration}分)
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <MapPin className="h-4 w-4 text-gray-400" />
+                            <span>{workshop.location}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="space-y-2 text-sm">
-                      <div>
-                        <span className="font-medium">持参物:</span> {workshop.materials}
+                      <div className="space-y-2 text-sm">
+                        <div>
+                          <span className="font-medium">持参物:</span> {workshop.materials}
+                        </div>
+                        <div>
+                          <span className="font-medium">注意事項:</span> {workshop.requirements}
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-medium">注意事項:</span> {workshop.requirements}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))
+              }
             </div>
           </TabsContent>
         </Tabs>

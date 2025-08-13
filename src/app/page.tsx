@@ -190,7 +190,7 @@ export default function HomePage() {
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-3xl font-bold text-gray-900">今後のイベント</h3>
             <Button asChild variant="outline">
-              <Link href="/workshops">カレンダーで見る</Link>
+              <Link href="/workshops">ワークショップを見る</Link>
             </Button>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
