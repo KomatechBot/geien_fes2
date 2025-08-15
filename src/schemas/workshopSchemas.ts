@@ -13,6 +13,8 @@ export const WorkshopSchema = z.object({
   materials: z.string(),
   requirements: z.string(),
   createdAt: z.string(), // ISO8601 形式で日時が入ることを期待するなら refine でチェックも可能
+  likes: z.number().default(0),
+  snsUrl: z.string().optional(), 
 });
 
 

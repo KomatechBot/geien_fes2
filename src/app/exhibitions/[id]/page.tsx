@@ -17,6 +17,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import QRCodeDisplay from "@/components/qrcodeDisplay"
+import { LikeButton } from "@/components/likebutton"
+import { CommentBox } from "@/components/comments_box"
 
 import type { Exhibition } from "@/types/exhibition"
 import type { Creator } from "@/types/creators"
@@ -282,10 +284,8 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
 
             {/* Quick Actions */}
             <Card>
-              <CardHeader>
-                <CardTitle>アクション</CardTitle>
-              </CardHeader>
               <CardContent className="space-y-3">
+                <p className="text-sm text-gray-800">再いいねは１時間後にできます</p> 
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline" className="w-full">
@@ -307,8 +307,10 @@ export default function ExhibitionDetailPage(props: {params: Promise<{ id: strin
                   <Share2 className="h-4 w-4 mr-2" />
                   この展示を共有
                 </Button>
+                <LikeButton contentId={exhibition.id} endpoint="exhibitions" initialLikes={exhibition.likes} />
               </CardContent>
             </Card>
+            <CommentBox contentId={exhibition.id} endpoint="exhibitions"/>
           </div>
         </div>
       </div>

@@ -16,6 +16,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import QRCodeDisplay from "@/components/qrcodeDisplay"
+import { LikeButton } from "@/components/likebutton"
+import { CommentBox } from "@/components/comments_box"
 
 import type { Workshop } from "@/types/workshop"
 
@@ -144,17 +146,18 @@ export default function WorkshopDetailPage(props: { params: Promise<{ id: string
                 <div>
                   <span className="font-medium">注意事項:</span> {workshop.requirements || "特になし"}
                 </div>
+                <div>
+                  <span className="font-medium">SNSアカウント:</span> {workshop.snsUrl || "特になし"}
+                </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* rightSide */}
+          {/* RightSide */}
           <div className="space-y-6">
-            <Card>
-                <CardHeader>
-                    <CardTitle>アクション</CardTitle>
-                </CardHeader>
+            <Card>               
                 <CardContent className="space-y-3">
+                  <p className="text-sm text-gray-800">再いいねは１時間後にできます</p> 
                     <Dialog>
                     <DialogTrigger asChild>
                         <Button variant="outline" className="w-full">
@@ -170,16 +173,18 @@ export default function WorkshopDetailPage(props: { params: Promise<{ id: string
                         </DialogDescription>
                         </DialogHeader>
                         <div className="flex justify-center py-4">
-                        <QRCodeDisplay url={currentUrl} />
+                            <QRCodeDisplay url={currentUrl} />
                         </div>
                     </DialogContent>
                     </Dialog>
                     <Button variant="outline" className="w-full" onClick={handleShare}>
                     <Share2 className="h-4 w-4 mr-2" />
-                    このワークショップを共有
+                        このワークショップを共有
                     </Button>
+                    <LikeButton contentId={workshop.id} endpoint="workshops" initialLikes={workshop.likes} />
                 </CardContent>
             </Card>
+            <CommentBox contentId={workshop.id} endpoint="workshops" />
           </div>
         </div>
       </div>

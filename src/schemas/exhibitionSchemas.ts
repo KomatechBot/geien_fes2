@@ -26,5 +26,6 @@ export const ExhibitionSchema = z.object({
   openingHours: z.string(),
   tags: z.string(),
   createdAt: z.string(), 
+  likes: z.number().default(0),
 });
 
