@@ -212,7 +212,6 @@ export default function HomePage() {
                 </CardHeader>
                 </Link>
               </Card>
-
             ))}
           </div>
         </div>
