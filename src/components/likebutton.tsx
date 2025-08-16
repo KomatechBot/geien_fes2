@@ -51,7 +51,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ contentId, endpoint, ini
                 document.cookie = `liked-${endpoint}-${contentId}=true; path=/; max-age=${ 60 * 60 }; samesite=lax`;
 
                 // sonner トースト
-                toast.success("リアクションありがとう！😊");
+                toast.success("いいねありがとう！😊");
             }
         } catch (err) {
             console.error("Fetch Error", err);
