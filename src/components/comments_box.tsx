@@ -6,6 +6,8 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Comment } from "@/types/comments";
 import { Textarea } from "./ui/textarea";
 
+import { blacklistWords } from "@/lib/blacklist";
+
 
 interface CommentBoxProps {
   contentId: string;
@@ -36,9 +38,21 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
       .catch(console.error);
   }, [endpoint, contentId]);
 
+  
+  // ブラックリストの単語に当てはまったら、自動で投稿をはじく機能
+  function containsBlacklistedWord(comment: string): boolean {
+    return blacklistWords.some(word => comment.includes(word.toLowerCase()))
+  }
+
   // コメントを送信
   const handleSubmit = async () => {
     if (!input.trim()) return;
+    
+    if (containsBlacklistedWord(input)) {
+      alert("不適切なワードが含まれているため投稿できません。")
+      return
+    }
+
 
     try {
       const res = await fetch("/api/comments", {
@@ -48,6 +62,7 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
       });
       if (!res.ok) return;
 
+      
       const data = await res.json();
       setComments(prev => [...prev, data.comment]);
       setInput("");

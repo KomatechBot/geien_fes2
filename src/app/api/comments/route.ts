@@ -5,7 +5,7 @@ import path from "path";
 import { Comment, CommentsData } from "@/types/comments";
 import { serialize, parse } from "cookie";
 import { createHmac } from "crypto";
-
+import { blacklistWords } from "@/lib/blacklist";
 
 const jsonFile = path.join(process.cwd(), "data/comments.json");
 const COOKIE_SECRET = process.env.COOKIE_SECRET || "dev-secret";
@@ -51,6 +51,11 @@ function verifyCommentCookie(cookies: Record<string,string>, endpoint: string, c
   return hash === expected;
 }
 
+// ブラックリストの単語に当てはまったら、自動で投稿をはじく機能
+function containsBlacklistedWord(comment: string): boolean {
+  return blacklistWords.some(word => comment.includes(word.toLowerCase()))
+}
+
 
 
 export async function GET(req: NextRequest) {
@@ -71,6 +76,11 @@ export async function POST(req: NextRequest) {
   const { endpoint, contentId, content } = body;
 
   if (!content) return NextResponse.json({ error: "コメントが空です" }, { status: 400 });
+
+
+  if (containsBlacklistedWord(content)) {
+    return NextResponse.json({ error: "不適切なワードが含まれています。" }, { status: 400 })
+  }
   
   const cookieHeader = req.headers.get("cookie") || "";
   const cookies = parse(cookieHeader);

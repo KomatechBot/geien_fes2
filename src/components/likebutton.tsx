@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 interface LikeButtonProps {
     contentId: string;
@@ -48,6 +49,9 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ contentId, endpoint, ini
 
                 // Cookie を 1時間保持
                 document.cookie = `liked-${endpoint}-${contentId}=true; path=/; max-age=${ 60 * 60 }; samesite=lax`;
+
+                // sonner トースト
+                toast.success("リアクションありがとう！😊");
             }
         } catch (err) {
             console.error("Fetch Error", err);
