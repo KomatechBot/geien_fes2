@@ -6,6 +6,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Comment } from "@/types/comments";
 import { Textarea } from "./ui/textarea";
 
+import sanitizeHtml from 'sanitize-html'
 import { blacklistWords } from "@/lib/blacklist";
 
 
@@ -53,12 +54,14 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
       return
     }
 
+    // サニタイズ処理
+    const safeInput = sanitizeHtml(input)
 
     try {
       const res = await fetch("/api/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ endpoint, contentId, content: input }),
+        body: JSON.stringify({ endpoint, contentId, content: safeInput }),
       });
       if (!res.ok) return;
 

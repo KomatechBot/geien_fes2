@@ -43,8 +43,8 @@ try {
     displayFilter,
   });
 
-  // フィルター処理に安心して使える
-  console.log(safeFilter);
+ // フィルター処理に安心して使える
+  console.log(safeFilter); 
 
 } catch (e) {
   console.error("フィルターの形式が不正です", e);
