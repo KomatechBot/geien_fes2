@@ -1,5 +1,6 @@
 import { z } from "zod"
-import { CommentSchema, CommentsDataSchema } from "@/schemas/commentsSchema";
+import { CreateCommentSchema, CommentSchema, CommentsResponseSchema } from "@/schemas/commentsSchema";
 
+export type CreateComment = z.infer<typeof CreateCommentSchema>;
 export type Comment = z.infer<typeof CommentSchema>;
-export type CommentsData = z.infer<typeof CommentsDataSchema>;
+export type CommentsResponse = z.infer<typeof CommentsResponseSchema>;

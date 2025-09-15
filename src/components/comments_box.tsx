@@ -1,24 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Comment } from "@/types/comments";
 import { Textarea } from "./ui/textarea";
 
 import sanitizeHtml from 'sanitize-html'
 import { blacklistWords } from "@/lib/blacklist";
+import { Comment } from "@/types/comments";
 
 
 interface CommentBoxProps {
   contentId: string;
-  endpoint: string;
+  endpoint: "exhibitions" | "workshops";
 }
 
 export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [input, setInput] = useState("");
   const [hasCommented, setHasCommented] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // cookie 判定
   useEffect(() => {
@@ -29,15 +30,21 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
   }, [endpoint, contentId]);
 
 
-   // コメントを取得
-  useEffect(() => {
-    fetch(`/api/comments?endpoint=${endpoint}&contentId=${contentId}`)
-      .then(res => res.json())
-      .then(data =>{
-        setComments(data.comments ?? []);
-      })
-      .catch(console.error);
+
+  // コメントを取得
+  const fetchComments = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/comments?targetType=${endpoint}&targetId=${contentId}`);
+      const data = await res.json();
+      setComments(Array.isArray(data.comments) ? data.comments : []);
+    } catch (err) {
+      console.error("コメント取得エラー:", err);
+    }
   }, [endpoint, contentId]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
 
   
   // ブラックリストの単語に当てはまったら、自動で投稿をはじく機能
@@ -56,24 +63,30 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
 
     // サニタイズ処理
     const safeInput = sanitizeHtml(input)
+      const createComment = {
+        targetType: endpoint,
+        targetId: contentId,
+        content: safeInput,
+      };
+        
+      setLoading(true);
+      try{
+          const res = await fetch("/api/comments", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(createComment),
+          });
 
-    try {
-      const res = await fetch("/api/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ endpoint, contentId, content: safeInput }),
-      });
-      if (!res.ok) return;
-
+        await fetchComments();
       
-      const data = await res.json();
-      setComments(prev => [...prev, data.comment]);
-      setInput("");
-      setHasCommented(true); 
-    } catch (err) {
-      console.error(err);
-    }
-  };
+        const data = await res.json();
+        setComments((prev) => [data.comment, ...prev])
+        setInput("");
+        setHasCommented(true);
+      } finally {
+        setLoading(false);
+      }
+    };
 
 
   return (
@@ -94,7 +107,9 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
                     onChange={(e) => setInput(e.target.value)}
                   />
                   <br />
-                  <Button onClick={handleSubmit}>送信</Button>
+                  <Button onClick={handleSubmit} disabled={loading}>
+                     {loading ? "送信中…" : "送信"}
+                  </Button>
                 </>
               )}
           </CardContent>
@@ -105,7 +120,7 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
                     <CardContent className="p-2">
                       <p>{c.content}</p>
                       <span className="text-xs text-gray-500">
-                        {new Date(c.createdAt).toLocaleString()}
+                        {c.createdAt}
                       </span>
                     </CardContent>
                   </Card>
