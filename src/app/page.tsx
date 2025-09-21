@@ -99,7 +99,7 @@ export default function HomePage() {
               学生たちの創作活動を展示し、制作者と利用者を繋ぐ藝苑祭の第二弾！
           </p>
           <div className="grid md:grid-cols-3 gap-20">
-            <Card className="text-center border-none shadow-none">
+            <Card className="text-center border-none shadow-none bg-gray-100">
               <CardHeader>
                 <Palette className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>多くの制作展示</CardTitle>
@@ -108,7 +108,7 @@ export default function HomePage() {
                 <CardDescription>デジタルアート、文学、デザートなど様々な制作物を見ることができます！</CardDescription>
               </CardContent>
             </Card>
-            <Card className="text-center border-none shadow-none">
+            <Card className="text-center border-none shadow-none bg-gray-100">
               <CardHeader>
                 <Users className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>制作者とのつながり</CardTitle>
@@ -117,7 +117,7 @@ export default function HomePage() {
                 <CardDescription>制作者の活動内容を通じて、制作者と利用者との交流ができます！</CardDescription>
               </CardContent>
             </Card>
-            <Card className="text-center border-none shadow-none">
+            <Card className="text-center border-none shadow-none bg-gray-100">
               <CardHeader>
                 <Calendar className="h-12 w-12 text-black mx-auto mb-4" />
                 <CardTitle>体験ワークショップ</CardTitle>
