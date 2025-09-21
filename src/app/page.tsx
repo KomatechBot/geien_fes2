@@ -63,7 +63,7 @@ export default function HomePage() {
 
 
   return (
-    <div className="min-h-screen bg-yellow-50">
+    <div className="min-h-screen  bg-neutral-200">
       {/* Header */}
       <header className="shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,14 +72,14 @@ export default function HomePage() {
               <h1 className="text-3xl font-bold text-black">藝苑祭</h1>
             </div>
             <nav className="hidden sm:flex space-x-8">
-              <Link href="/exhibitions" className="text-gray-700 hover:text-red-900 font-bold">
+              <Link href="/exhibitions" className="text-black hover:text-gray-700 font-bold">
                 展示品
               </Link>
-              <Link href="/creators" className="text-gray-700 hover:text-red-900 font-bold">
+              <Link href="/creators" className="text-black hover:text-gray-700 font-bold">
                 制作者プロフィール
               </Link>
-              <Link href="/workshops" className="text-gray-700 hover:text-red-900 font-bold">
-                イベントカレンダー
+              <Link href="/workshops" className="text-black hover:text-gray-700 font-bold">
+                ワークショップ
               </Link>
             </nav>
           </div>
@@ -92,11 +92,11 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">藝苑祭とは？</h3>
           <p className="flex justify-center items-center text-center text-2xl sm:text-3xl font-semibold drop-shadow-md mb-8 ">
-              学生たちの創作活動を展示し、制作者と利用者を繋ぐクリエイティブフェスティバル！
+              学生たちの創作活動を展示し、制作者と利用者を繋ぐ藝苑祭の第二弾！
           </p>
           <div className="grid md:grid-cols-3 gap-20">
             <Card className="text-center border-none shadow-none">
@@ -105,7 +105,7 @@ export default function HomePage() {
                 <CardTitle>多くの制作展示</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>デジタルアート、文学、デザートなど様々な制作物を見たり、試食ができます！</CardDescription>
+                <CardDescription>デジタルアート、文学、デザートなど様々な制作物を見ることができます！</CardDescription>
               </CardContent>
             </Card>
             <Card className="text-center border-none shadow-none">
@@ -123,7 +123,7 @@ export default function HomePage() {
                 <CardTitle>体験ワークショップ</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>制作体験ができるワークショップで制作の楽しみが共有できる！</CardDescription>
+                <CardDescription>体験ができるワークショップで制作を楽しめる！</CardDescription>
               </CardContent>
             </Card>
           </div>
@@ -135,7 +135,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-3xl font-bold text-black ">注目の展示</h3>
-            <Button asChild variant="outline">
+            <Button asChild variant="secondary">
               <Link href="/exhibitions">すべて見る</Link>
             </Button>
           </div>
@@ -185,11 +185,11 @@ export default function HomePage() {
       </section>
 
       {/* Upcoming Workshops */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-3xl font-bold text-gray-900">今後のイベント</h3>
-            <Button asChild variant="outline">
+            <h3 className="text-3xl font-bold text-gray-900">今後のワークショップ</h3>
+            <Button asChild variant="secondary">
               <Link href="/workshops">ワークショップを見る</Link>
             </Button>
           </div>
@@ -225,7 +225,7 @@ export default function HomePage() {
               <div className="flex items-center space-x-2 mb-4">
                 <span className="text-xl font-bold">藝苑祭</span>
               </div>
-              <p className="text-gray-400">学生たちの創作活動を展示し、制作者と利用者を繋ぐクリエイティブフェスティバル</p>
+              <p className="text-gray-400">学生たちの創作活動を展示し、制作者と利用者を繋ぐ藝苑祭</p>
               <br />
               <div>
                 <ul>

@@ -131,8 +131,7 @@ export default function WorkshopsPage() {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   return (
-    <div className="min-h-screen bg-yellow-50">
-      {/* Header */}
+    <div className="min-h-screen bg-neutral-100" >
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
@@ -154,7 +153,7 @@ export default function WorkshopsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="list" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 bg-gray-50">
+          <TabsList className="grid w-full grid-cols-2 bg-white">
             <TabsTrigger value="list">リスト表示</TabsTrigger>
             <TabsTrigger value="calendar">カレンダー表示</TabsTrigger>
           </TabsList>

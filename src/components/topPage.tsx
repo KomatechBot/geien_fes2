@@ -47,7 +47,7 @@ export default function TopPage() {
 
       {/* 背景画像 */}
       <Image
-        src="/Geien_poster.png"
+        src="/Geien2_poster.png"
         alt="藝苑祭の写真"
         height={1000}
         width={800}
