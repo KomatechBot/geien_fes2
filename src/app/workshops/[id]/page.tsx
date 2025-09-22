@@ -59,12 +59,12 @@ export default function WorkshopDetailPage(props: { params: Promise<{ id: string
   const isUpcoming = eventDate >= new Date(today.getFullYear(), today.getMonth(), today.getDate())
 
   return (
-    <div className="min-h-screen  bg-neutral-100">
+    <div className="min-h-screen  bg-neutral-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-black shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <Button asChild variant="ghost" size="sm">
+            <Button asChild variant="default" size="sm">
               <Link href="/workshops">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 ワークショップ一覧に戻る
@@ -77,7 +77,7 @@ export default function WorkshopDetailPage(props: { params: Promise<{ id: string
               </Button>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button size="sm">
+                  <Button variant="default" size="sm">
                     <QrCode className="h-4 w-4 mr-1" />
                     QRコード
                   </Button>

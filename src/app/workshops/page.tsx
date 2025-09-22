@@ -131,20 +131,20 @@ export default function WorkshopsPage() {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   return (
-    <div className="min-h-screen bg-neutral-100" >
-      <header className="bg-white shadow-sm border-b">
+    <div className="min-h-screen bg-neutral-50" >
+      <header className="bg-black shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center space-x-4">
-              <Button asChild variant="ghost" size="sm">
+              <Button asChild variant="default" size="sm">
                 <Link href="/">
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   ホームに戻る
                 </Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <Calendar className="h-8 w-8 text-black" />
-                <h1 className="text-2xl font-bold text-gray-900">ワークショップ</h1>
+                <Calendar className="h-8 w-8 text-white" />
+                <h1 className="text-2xl font-bold text-white">ワークショップ</h1>
               </div>
             </div>
           </div>

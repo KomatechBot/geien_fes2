@@ -69,20 +69,20 @@ try {
   const categories = ["all", "写真", "絵画", "イラスト", "ゲーム","小説","その他"]
 
   return (
-    <div className="min-h-screen bg-neutral-100">
+    <div className="min-h-screen bg-neutral-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-black shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center space-x-4">
-              <Button asChild variant="ghost" size="sm">
+              <Button asChild variant="default" size="sm">
                 <Link href="/">
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   ホームに戻る
                 </Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <h1 className="text-2xl font-bold text-gray-900">展示一覧</h1>
+                <h1 className="text-2xl font-bold text-white">展示一覧</h1>
               </div>
             </div>
           </div>

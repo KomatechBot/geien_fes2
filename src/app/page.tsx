@@ -63,22 +63,22 @@ export default function HomePage() {
 
 
   return (
-    <div className="min-h-screen  bg-neutral-200">
+    <div className="h-full bg-neutral-900">
       {/* Header */}
-      <header className="shadow-sm border-b">
+      <header className="shadow-sm border-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center space-x-2">
-              <h1 className="text-3xl font-bold text-black">藝苑祭</h1>
+              <h1 className="text-3xl font-bold text-white">藝苑祭</h1>
             </div>
             <nav className="hidden sm:flex space-x-8">
-              <Link href="/exhibitions" className="text-black hover:text-gray-700 font-bold">
+              <Link href="/exhibitions" className="text-white hover:text-gray-500 font-bold">
                 展示品
               </Link>
-              <Link href="/creators" className="text-black hover:text-gray-700 font-bold">
+              <Link href="/creators" className="text-white hover:text-gray-500 font-bold">
                 制作者プロフィール
               </Link>
-              <Link href="/workshops" className="text-black hover:text-gray-700 font-bold">
+              <Link href="/workshops" className="text-white hover:text-gray-500 font-bold">
                 ワークショップ
               </Link>
             </nav>
@@ -87,14 +87,14 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative flex h-auto w-auto justify-center items-center bg-sky-950 ">
+      <section className="relative flex h-full w-full justify-center items-center bg-sky-950 ">
           <TopPage />
       </section>
 
       {/* Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">藝苑祭とは？</h3>
+          <h3 className="text-3xl font-bold text-center text-black mb-12">藝苑祭とは？</h3>
           <p className="flex justify-center items-center text-center text-2xl sm:text-3xl font-semibold drop-shadow-md mb-8 ">
               学生たちの創作活動を展示し、制作者と利用者を繋ぐ藝苑祭の第二弾！
           </p>
@@ -105,7 +105,7 @@ export default function HomePage() {
                 <CardTitle>多くの制作展示</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>デジタルアート、文学、デザートなど様々な制作物を見ることができます！</CardDescription>
+                <CardDescription>デジタルアート、文学など様々な制作物を見ることができます！</CardDescription>
               </CardContent>
             </Card>
             <Card className="text-center border-none shadow-none bg-gray-100">
@@ -134,7 +134,7 @@ export default function HomePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-3xl font-bold text-black ">注目の展示</h3>
+            <h3 className="text-3xl font-bold text-white ">注目の展示</h3>
             <Button asChild variant="secondary">
               <Link href="/exhibitions">すべて見る</Link>
             </Button>
@@ -218,7 +218,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-neutral-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
