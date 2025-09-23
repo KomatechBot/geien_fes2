@@ -77,8 +77,8 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ contentId, endpoint }) =
             body: JSON.stringify(createComment),
           });
 
-        await fetchComments();
-      
+        
+    
         const data = await res.json();
         setComments((prev) => [data.comment, ...prev])
         setInput("");
