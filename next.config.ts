@@ -13,7 +13,6 @@ const ContentSecurityPolicy = `
 `;
 
 
-
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
