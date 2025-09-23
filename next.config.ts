@@ -1,5 +1,19 @@
 import type { NextConfig } from "next";
 
+const ContentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' https://images.microcms-assets.io;
+  font-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+  frame-ancestors 'none';
+`;
+
+
+
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
@@ -10,6 +24,19 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+  },
+   async headers() {
+    return [
+      {
+        source: '/(.*)', // 全ページに適用
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: ContentSecurityPolicy.replace(/\s{2,}/g, ' ').trim(),
+          },
+        ],
+      },
+    ];
   },
 };
 

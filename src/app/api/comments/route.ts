@@ -127,9 +127,9 @@ export async function POST(req: NextRequest) {
   const cookie = serialize(`commented-${targetType}-${targetId}`, cookieValue, {
     path: "/",
     maxAge: 60 * 60,
-    httpOnly: false,
+    httpOnly: true,
     sameSite: "lax",
-    secure: true  //process.env.NODE_ENV === "production",
+    secure: true  
   });
 
 
