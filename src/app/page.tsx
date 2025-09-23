@@ -63,7 +63,7 @@ export default function HomePage() {
 
 
   return (
-    <div className="h-full bg-neutral-900">
+    <div className="flex flex-col min-h-screen bg-neutral-900">
       {/* Header */}
       <header className="shadow-sm border-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,12 +84,13 @@ export default function HomePage() {
             </nav>
           </div>
         </div>
+        
       </header>
 
       {/* Hero Section */}
-      <section className="relative flex h-full w-full justify-center items-center bg-sky-950 ">
-          <TopPage />
-      </section>
+        <section className="flex-1 flex justify-center items-center bg-sky-950 ">
+            <TopPage />
+        </section>
 
       {/* Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">

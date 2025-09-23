@@ -3,7 +3,7 @@
 export default function TopPage() {
   return (
     <>
-      <div className="relative w-full h-screen overflow-hidden">
+      <div className="relative w-full h-[1050px] overflow-hidden">
         {/* 背景動画 */}
         <video
           autoPlay
@@ -17,8 +17,6 @@ export default function TopPage() {
 
         {/* オーバーレイ */}
         <div className="absolute inset-0 bg-black/5 z-10" />
-
-
       </div>
     </>
   );
