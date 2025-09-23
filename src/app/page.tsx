@@ -88,7 +88,7 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-        <section className="flex-1 flex justify-center items-center bg-sky-950 ">
+        <section className="relative flex justify-center items-center bg-sky-950 ">
             <TopPage />
         </section>
 

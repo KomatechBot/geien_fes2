@@ -3,7 +3,7 @@
 export default function TopPage() {
   return (
     <>
-      <div className="relative w-full h-[1050px] overflow-hidden">
+      <div className="relative w-full h-screen overflow-hidden">
         {/* 背景動画 */}
         <video
           autoPlay
