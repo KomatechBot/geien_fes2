@@ -76,7 +76,7 @@ export default function HomePage() {
                 展示品
               </Link>
               <Link href="/creators" className="text-white hover:text-gray-500 font-bold">
-                制作者プロフィール
+                団体名
               </Link>
               <Link href="/workshops" className="text-white hover:text-gray-500 font-bold">
                 ワークショップ

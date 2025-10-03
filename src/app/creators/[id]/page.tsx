@@ -56,7 +56,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
             <Button asChild variant="default" size="sm">
               <Link href="/creators">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                創作者一覧に戻る
+                団体一覧に戻る
               </Link>
             </Button>
           </div>
