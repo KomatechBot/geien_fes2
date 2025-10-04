@@ -272,7 +272,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <Link href="/workshops" className="hover:text-white">
-                    イベントカレンダー
+                    ワークショップ
                   </Link>
                 </li>
               </ul>
