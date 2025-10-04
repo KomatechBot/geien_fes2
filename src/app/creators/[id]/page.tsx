@@ -117,7 +117,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
             {/* About */}
             <Card>
               <CardHeader>
-                <CardTitle>自己紹介</CardTitle>
+                <CardTitle>紹介カード</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="prose max-w-none">
