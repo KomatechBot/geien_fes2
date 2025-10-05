@@ -14,10 +14,10 @@ import { Menu } from "lucide-react"
 
 export default function Header() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-2 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-2 lg:px-4">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center space-x-2">
-              <h1 className="text-2xl font-bold text-white">藝苑祭</h1>
+              <h1 className="text-3xl font-bold text-white">藝苑祭</h1>
             </div>
             <nav className="hidden sm:flex space-x-8">
               <Link href="/exhibitions" className="text-white hover:text-gray-500 font-bold">
@@ -36,7 +36,7 @@ export default function Header() {
                 <Sheet>
                     <SheetTrigger asChild>
                     <Button variant="ghost" size="lg">
-                        <Menu className="text-white w-10 h-10" />
+                        <Menu className="text-white w-8 h-8" />
                     </Button>
                     </SheetTrigger>
 
