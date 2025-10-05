@@ -11,6 +11,7 @@ import type { Exhibition } from "@/types/exhibition"
 import type { Workshop } from "@/types/workshop"
 
 import TopPage from "@/components/topPage"
+import Header from "@/components/header"
 
 
 
@@ -66,25 +67,7 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen bg-neutral-900">
       {/* Header */}
       <header className="shadow-sm border-none">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-2">
-              <h1 className="text-3xl font-bold text-white">藝苑祭</h1>
-            </div>
-            <nav className="hidden sm:flex space-x-8">
-              <Link href="/exhibitions" className="text-white hover:text-gray-500 font-bold">
-                展示品
-              </Link>
-              <Link href="/creators" className="text-white hover:text-gray-500 font-bold">
-                団体名
-              </Link>
-              <Link href="/workshops" className="text-white hover:text-gray-500 font-bold">
-                ワークショップ
-              </Link>
-            </nav>
-          </div>
-        </div>
-        
+        <Header />
       </header>
 
       {/* Hero Section */}
