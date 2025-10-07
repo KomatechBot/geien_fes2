@@ -76,7 +76,7 @@ export default function CreatorsPage() {
                 <p className="text-sm text-gray-600">{creator.description}</p>
 
                 <div>
-                  <h4 className="font-medium text-sm mb-2">専門分野</h4>
+                  <h4 className="font-medium text-sm mb-2">ジャンル</h4>
                   <div className="flex flex-wrap gap-1">
                     <div className="flex flex-wrap gap-2">
                       { creator.specialties && (

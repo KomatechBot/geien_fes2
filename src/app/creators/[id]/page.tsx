@@ -100,7 +100,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Palette className="h-5 w-5" />
-                  <span>専門分野</span>
+                  <span>ジャンル</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -131,7 +131,7 @@ export default function CreatorDetailPage(props: {params: Promise<{ id: string}>
             {/* Achievements */}
             <Card>
               <CardHeader>
-                <CardTitle>主な実績</CardTitle>
+                <CardTitle>主な活動</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
