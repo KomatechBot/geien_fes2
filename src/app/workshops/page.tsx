@@ -234,10 +234,10 @@ export default function WorkshopsPage() {
 
                       <div className="space-y-2 text-sm">
                         <div>
-                          <span className="font-medium">持参物:</span> {workshop.materials}
+                          <span className="font-medium">団体側が準備してくれる物:</span> {workshop.materials}
                         </div>
                         <div>
-                          <span className="font-medium">注意事項:</span> {workshop.requirements}
+                          <span className="font-medium">参加者の準備物:</span> {workshop.requirements}
                         </div>
                       </div>
                     </CardContent>

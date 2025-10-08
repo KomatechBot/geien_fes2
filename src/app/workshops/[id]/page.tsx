@@ -141,10 +141,10 @@ export default function WorkshopDetailPage(props: { params: Promise<{ id: string
                   <span className="font-medium">講師(団体):</span> {workshop.instructor}
                 </div>
                 <div>
-                  <span className="font-medium">参加者の持ち物:</span> {workshop.materials || "特になし"}
+                  <span className="font-medium">団体側が準備してくれる物:</span> {workshop.materials || "特になし"}
                 </div>
                 <div>
-                  <span className="font-medium">団体側が準備してくれる物:</span> {workshop.requirements || "特になし"}
+                  <span className="font-medium">参加者の準備物:</span> {workshop.requirements || "特になし"}
                 </div>
                 <div>
                   <span className="font-medium">SNSアカウント:</span> {workshop.snsUrl || "特になし"}
