@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com;
+  connect-src 'self' https://va.vercel-scripts.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' https://images.microcms-assets.io;
   font-src 'self';

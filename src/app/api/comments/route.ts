@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ comments: [] }, { status: 200 }); 
     }
 
-    const data = await client.get({
+    const data = await client.getAllContents({
       endpoint: "comments",
       queries: {
         filters: `targetType[equals]${targetType},targetId[equals]${targetId}`,
